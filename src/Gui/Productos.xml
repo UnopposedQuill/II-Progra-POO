@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <Productos>
+        <Casado>
+            <Codigo>
+                PRN-001
+            </Codigo>
+            <Descripcion>
+                Arroz Blanco con Frijoles y Bistec
+            </Descripcion>
+            <TamanhoPorcion>
+                1000
+            </TamanhoPorcion>
+            <PiezasPorPorcion>
+                1
+            </PiezasPorPorcion>
+            <CaloriasEnUnaPorcion>
+                400
+            </CaloriasEnUnaPorcion>
+            <CaloriasPorPieza>
+                400
+            </CaloriasPorPieza>
+            <Precio>
+                2500
+            </Precio>
+        </Casado>
+        <Helado>
+            <Codigo>
+                PTR-001
+            </Codigo>
+            <Descripcion>
+                
+            </Descripcion>
+            <TamanhoPorcion>
+                1000
+            </TamanhoPorcion>
+            <PiezasPorPorcion>
+                1
+            </PiezasPorPorcion>
+            <CaloriasEnUnaPorcion>
+                400
+            </CaloriasEnUnaPorcion>
+            <CaloriasPorPieza>
+                400
+            </CaloriasPorPieza>
+            <Precio>
+                2500
+            </Precio>
+        </Helado>
+        <TeFrio>
+            <Codigo>
+                BEB-001
+            </Codigo>
+        </TeFrio>
+        <Sopa>
+            <Codigo>
+                ENT-001
+            </Codigo>
+        </Sopa>
+    </Productos>
+</root>
