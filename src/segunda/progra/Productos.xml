@@ -13,19 +13,19 @@ and open the template in the editor.
                 PRN-001
             </Codigo>
             <Descripcion>
-                Arroz Blanco con Frijoles y Bistec
+                Arroz Blanco con frijoles enteros o molidos, huevo o queso frito, alguna carne a escoger y ensalada.
             </Descripcion>
             <TamanhoPorcion>
-                1000
+                750 gramos
             </TamanhoPorcion>
             <PiezasPorPorcion>
                 1
             </PiezasPorPorcion>
             <CaloriasEnUnaPorcion>
-                400
+                500
             </CaloriasEnUnaPorcion>
             <CaloriasPorPieza>
-                400
+                100
             </CaloriasPorPieza>
             <Precio>
                 2500
@@ -36,33 +36,69 @@ and open the template in the editor.
                 PTR-001
             </Codigo>
             <Descripcion>
-                
+              Leche batida, congelada, endulzada y concentrada, consumible en diferentes sabores, formas y tamaños.  
             </Descripcion>
             <TamanhoPorcion>
-                1000
+                250 gramos
             </TamanhoPorcion>
             <PiezasPorPorcion>
                 1
             </PiezasPorPorcion>
             <CaloriasEnUnaPorcion>
-                400
+                1000
             </CaloriasEnUnaPorcion>
             <CaloriasPorPieza>
-                400
+                750
             </CaloriasPorPieza>
             <Precio>
-                2500
+                900
             </Precio>
         </Helado>
         <TeFrio>
             <Codigo>
                 BEB-001
             </Codigo>
+            <Descripcion>
+               Consiste en una forma helada de té, servida a menudo en un vaso con hielo.
+            </Descripcion>
+            <TamanhoPorcion>
+                100 gramos
+            </TamanhoPorcion>
+            <PiezasPorPorcion>
+                1
+            </PiezasPorPorcion>
+            <CaloriasEnUnaPorcion>
+                50
+            </CaloriasEnUnaPorcion>
+            <CaloriasPorPieza>
+                50
+            </CaloriasPorPieza>
+            <Precio>
+                500
+            </Precio>
         </TeFrio>
-        <Sopa>
+        <Sopa_de_Mariscos>
             <Codigo>
                 ENT-001
             </Codigo>
-        </Sopa>
+            <Descripcion>
+              Contiene patas de pulpo, langostinos y unos trozos de calamar. Igualmente puede contener mejillones, almejas, y otros pescados, así como otras verduras, como guisantes o alcachofas. 
+            </Descripcion>
+            <TamanhoPorcion>
+                1250 gramos
+            </TamanhoPorcion>
+            <PiezasPorPorcion>
+                1
+            </PiezasPorPorcion>
+            <CaloriasEnUnaPorcion>
+                1500
+            </CaloriasEnUnaPorcion>
+            <CaloriasPorPieza>
+                100
+            </CaloriasPorPieza>
+            <Precio>
+                3000
+            </Precio>
+        </Sopa_de_Mariscos>
     </Productos>
 </root>
