@@ -39,6 +39,27 @@ public class Servidor {
     }
     
     /**
+     * Crea un servidor nuevo a partir del nombre de un archivo XML que se supone que tiene los nombre de los XML
+     * @param XML El nombre 
+     */
+    public Servidor(String XML) {
+        this.activo = true;
+        this.pausado = true;
+        this.productos = this.conseguirProductosXML(XML);
+        this.pedidos = new ArrayList();
+    }
+    
+    /**
+     * Crea un servidor nuevo a partir del nombre de un archivo XML por defecto que está dentro de la carpeta del proyecto
+     */
+    public Servidor() {
+        this.activo = true;
+        this.pausado = true;
+        this.productos = this.conseguirProductosXML("Productos.xml");
+        this.pedidos = new ArrayList();
+    }
+    
+    /**
      * Esto es para que el servidor se detenga, esté o no en ejecución
      * @return El estado en el que quedó el servidor
      */
@@ -205,5 +226,13 @@ public class Servidor {
                 }
             }
         }
+    }
+    
+    /**
+     * Este método es para cargar los datos de un XML como los productos del servidor
+     * @return Un ArrayList con los productos del servidor
+     */
+    private ArrayList<Producto> conseguirProductosXML(String XML){
+        return new ArrayList<>();
     }
 }

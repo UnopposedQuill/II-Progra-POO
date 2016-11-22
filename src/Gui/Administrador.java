@@ -14,13 +14,13 @@ import segunda.progra.*;
  */
 public class Administrador extends javax.swing.JFrame {
 
-    private Servidor servidor;
+    private Administrador administrador;
     /**
      * Creates new form Administrador
      */
     public Administrador() {
         initComponents();
-        this.servidor = new Servidor(this.conseguirProductosXML());
+        this.administrador = new Administrador();
         this.jScrollPane1.setVisible(false);
         this.jScrollPane2.setVisible(false);
         this.LabelPedidos.setVisible(false);
@@ -337,7 +337,4 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton observarTodosProductos;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Producto> conseguirProductosXML(){
-        return new ArrayList<>();
-    }
 }
