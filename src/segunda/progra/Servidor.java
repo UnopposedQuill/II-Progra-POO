@@ -7,7 +7,9 @@ package segunda.progra;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
+import java.util.*;
+import org.jdom2.*;
+import org.jdom2.input.SAXBuilder;
 
 /**
  *
@@ -233,6 +235,30 @@ public class Servidor {
      * @return Un ArrayList con los productos del servidor
      */
     private ArrayList<Producto> conseguirProductosXML(String XML){
+        SAXBuilder saxBuilder = new SAXBuilder();
+        File archivoXML = new File(XML);
+        try{
+            Document documentoXML = (Document) saxBuilder.build(archivoXML);
+            Element nodoRaiz = documentoXML.getRootElement();
+            
+            List listaRaiz = nodoRaiz.getChildren();
+            
+            Element listaProductos = (Element) listaRaiz.get(0);
+            
+            for (int i = 0; i < listaProductos.getChildren().size(); i++) {
+                Element get = listaProductos.getChildren().get(i);
+                System.out.println(get.getName());
+                System.out.println("Elementos Producto: ");
+                for (int j = 0; j < get.getChildren().size(); j++) {
+                    Element get1 = get.getChildren().get(j);
+                    //System.out.println(get1);
+                    System.out.println(get1.getName());
+                    System.out.println(get1.getAttributes());
+                }
+            }
+        }catch(JDOMException | IOException exc){
+            System.out.println("Error a la hora de agarrar el archivo XML especificado");
+        }
         return new ArrayList<>();
     }
 }
