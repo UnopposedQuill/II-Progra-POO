@@ -38,14 +38,14 @@ public class Producto implements Cloneable{
 
     /**
      * Este es el constructor que se va a usar por defecto, este inicializa todos los valores con valores útiles para el programa
-     * @param codigo
-     * @param nombre
-     * @param descripcion
-     * @param tamanhoPorcion
-     * @param piezasPorcion
-     * @param caloriasPorcion
-     * @param caloriasPieza
-     * @param precio 
+     * @param codigo El código que tendrá el producto
+     * @param nombre El nombre que tendrá el producto
+     * @param descripcion La descripción del producto
+     * @param tamanhoPorcion La cantidad de gramos que tiene cada porción
+     * @param piezasPorcion La cantidad de piezas que tiene la porción
+     * @param caloriasPorcion La cantidad de calorías que tiene cada porción del producto
+     * @param caloriasPieza La cantidad de calorías que tiene cada pieza del producto
+     * @param precio El precio que tiene el producto
      */
     public Producto(String codigo, String nombre, String descripcion, int tamanhoPorcion, int piezasPorcion, int caloriasPorcion, int caloriasPieza, int precio) {
         this.codigo = codigo;
