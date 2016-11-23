@@ -21,6 +21,9 @@ public class Producto implements Cloneable{
     private int precio;
     private boolean habilitado;
     
+    /**
+     * Este constructor inicializa todos los valores con inicializaciones inútiles, sólo pide memoria
+     */
     Producto(){
         this.codigo = null;
         this.nombre = null;
@@ -33,6 +36,17 @@ public class Producto implements Cloneable{
         this.habilitado = false;
     }
 
+    /**
+     * Este es el constructor que se va a usar por defecto, este inicializa todos los valores con valores útiles para el programa
+     * @param codigo
+     * @param nombre
+     * @param descripcion
+     * @param tamanhoPorcion
+     * @param piezasPorcion
+     * @param caloriasPorcion
+     * @param caloriasPieza
+     * @param precio 
+     */
     public Producto(String codigo, String nombre, String descripcion, int tamanhoPorcion, int piezasPorcion, int caloriasPorcion, int caloriasPieza, int precio) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -109,15 +123,28 @@ public class Producto implements Cloneable{
         this.precio = precio;
     }
 
+    /**
+     * Este método averiguar si el producto está habilitado para ser pedido por el sistema
+     * @return True si el producto está habilitado, False en el otro caso
+     */
     public boolean isHabilitado() {
         return habilitado;
     }
 
+    /**
+     * Este método invierte el estado actual del producto, haciendo que esté habilitado si no lo estaba previamente, y deshabilitado
+     * si estaba habilitado previamente
+     * @return True si el producto termina habilitado, False si queda deshabilitado
+     */
     public boolean habilitar(){
         this.habilitado = !this.habilitado;
         return this.habilitado;
     }
     
+    /**
+     * Retorna el tipo de producto
+     * @return Un enum del tipo Tipo que contiene el tipo
+     */
     public Tipo getTipo(){
         return Tipo.ParseTipo(this.codigo);
     }

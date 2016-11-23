@@ -237,28 +237,35 @@ public class Servidor {
     private ArrayList<Producto> conseguirProductosXML(String XML){
         SAXBuilder saxBuilder = new SAXBuilder();
         File archivoXML = new File(XML);
+        ArrayList <Producto> arrayLProductos = new ArrayList();
         try{
             Document documentoXML = (Document) saxBuilder.build(archivoXML);
             Element nodoRaiz = documentoXML.getRootElement();
+
+            List <Element> listaProductos = nodoRaiz.getChildren();
             
-            List listaRaiz = nodoRaiz.getChildren();
-            
-            Element listaProductos = (Element) listaRaiz.get(0);
-            
-            for (int i = 0; i < listaProductos.getChildren().size(); i++) {
-                Element get = listaProductos.getChildren().get(i);
-                System.out.println(get.getName());
+            for (Element producto : listaProductos) {
+                System.out.println(Servidor.eliminaUnderScores(producto.getName()));
                 System.out.println("Elementos Producto: ");
-                for (int j = 0; j < get.getChildren().size(); j++) {
-                    Element get1 = get.getChildren().get(j);
-                    //System.out.println(get1);
-                    System.out.println(get1.getName());
-                    System.out.println(get1.getAttributes());
+                for (Element elementosProducto : producto.getChildren()) {
+                    System.out.println(elementosProducto.getTextTrim());
                 }
+                
             }
+            
         }catch(JDOMException | IOException exc){
             System.out.println("Error a la hora de agarrar el archivo XML especificado");
         }
         return new ArrayList<>();
+    }
+    
+    /**
+     * Este método se usa para cambiar los underscores ('_') de un string por un espacio en blanco
+     * @param string El string del cual se van a cambiar los underscores
+     * @return El string sin underscores
+     */
+    private static String eliminaUnderScores(String string){
+        string = string.replaceAll("_", " ");
+        return string;
     }
 }
