@@ -16,7 +16,7 @@ public class SegundaProgra {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        Servidor servidorPrueba = new Servidor();
     }
     
 }
