@@ -148,5 +148,11 @@ public class Producto implements Cloneable{
     public Tipo getTipo(){
         return Tipo.ParseTipo(this.codigo);
     }
+
+    @Override
+    public String toString() {
+        return "Producto: " + codigo + ", nombre: " + nombre + ", descripción: " + descripcion + ", tamaño de la porción: " + tamanhoPorcion + ", piezas de la porción: " + piezasPorcion + ", calorias por porción: " + caloriasPorcion + ", calorias por pieza: " + caloriasPieza + ", precio: " + precio + ", habilitado: " + habilitado;
+    }
+    
     
 }

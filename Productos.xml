@@ -10,7 +10,7 @@ and open the template in the editor.
     <Casado>
         <Codigo>PRN-001</Codigo>
         <Descripcion>Arroz Blanco con frijoles enteros o molidos, huevo o queso frito, alguna carne a escoger y ensalada.</Descripcion>
-        <TamanhoPorcion>750 gramos</TamanhoPorcion>
+        <TamanhoPorcion>750</TamanhoPorcion>
         <PiezasPorPorcion>1</PiezasPorPorcion>
         <CaloriasEnUnaPorcion>500</CaloriasEnUnaPorcion>
         <CaloriasPorPieza>100</CaloriasPorPieza>
@@ -19,7 +19,7 @@ and open the template in the editor.
     <Helado>
         <Codigo>PTR-001</Codigo>
         <Descripcion>Leche batida, congelada, endulzada y concentrada, consumible en diferentes sabores, formas y tamaños.</Descripcion>
-        <TamanhoPorcion>250 gramos</TamanhoPorcion>
+        <TamanhoPorcion>250</TamanhoPorcion>
         <PiezasPorPorcion>1</PiezasPorPorcion>
         <CaloriasEnUnaPorcion>1000</CaloriasEnUnaPorcion>
         <CaloriasPorPieza>750</CaloriasPorPieza>
@@ -28,7 +28,7 @@ and open the template in the editor.
     <TeFrio>
         <Codigo>BEB-001</Codigo>
         <Descripcion>Consiste en una forma helada de té, servida a menudo en un vaso con hielo.</Descripcion>
-        <TamanhoPorcion>100 gramos</TamanhoPorcion>
+        <TamanhoPorcion>100</TamanhoPorcion>
         <PiezasPorPorcion>1</PiezasPorPorcion>
         <CaloriasEnUnaPorcion>50</CaloriasEnUnaPorcion>
         <CaloriasPorPieza>50</CaloriasPorPieza>
@@ -37,7 +37,7 @@ and open the template in the editor.
     <Sopa_de_Mariscos>
         <Codigo>ENT-001</Codigo>
         <Descripcion>Contiene patas de pulpo, langostinos y unos trozos de calamar. Igualmente puede contener mejillones, almejas, y otros pescados, así como otras verduras, como guisantes o alcachofas.</Descripcion>
-        <TamanhoPorcion>1250 gramos</TamanhoPorcion>
+        <TamanhoPorcion>1250</TamanhoPorcion>
         <PiezasPorPorcion>1</PiezasPorPorcion>
         <CaloriasEnUnaPorcion>1500</CaloriasEnUnaPorcion>
         <CaloriasPorPieza>100</CaloriasPorPieza>

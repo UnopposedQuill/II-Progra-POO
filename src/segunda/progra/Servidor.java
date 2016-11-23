@@ -46,7 +46,7 @@ public class Servidor {
      */
     public Servidor(String XML) {
         this.activo = true;
-        this.pausado = true;
+        this.pausado = false;
         this.productos = this.conseguirProductosXML(XML);
         this.pedidos = new ArrayList();
     }
@@ -56,7 +56,7 @@ public class Servidor {
      */
     public Servidor() {
         this.activo = true;
-        this.pausado = true;
+        this.pausado = false;
         this.productos = this.conseguirProductosXML("Productos.xml");
         this.pedidos = new ArrayList();
     }
@@ -245,18 +245,23 @@ public class Servidor {
             List <Element> listaProductos = nodoRaiz.getChildren();
             
             for (Element producto : listaProductos) {
-                System.out.println(Servidor.eliminaUnderScores(producto.getName()));
-                System.out.println("Elementos Producto: ");
-                for (Element elementosProducto : producto.getChildren()) {
-                    System.out.println(elementosProducto.getTextTrim());
-                }
+                //System.out.println(Servidor.eliminaUnderScores(producto.getName()));
+                //System.out.println("Elementos Producto: ");
+                List <Element> listaElementos = producto.getChildren();
+                Producto productoAAgregar = new Producto(listaElementos.get(0).getTextTrim(), Servidor.eliminaUnderScores(producto.getName()), listaElementos.get(1).getTextTrim(), Integer.parseInt(listaElementos.get(2).getTextTrim()), Integer.parseInt(listaElementos.get(3).getTextTrim()), Integer.parseInt(listaElementos.get(4).getTextTrim()), Integer.parseInt(listaElementos.get(5).getTextTrim()), Integer.parseInt(listaElementos.get(6).getTextTrim()));
+                //System.out.println("Producto Nuevo: ");
+                //System.out.println(productoAAgregar.toString());
+                arrayLProductos.add(productoAAgregar);
+                //for (Element elementosProducto : listaElementos) {
+                //    System.out.println(elementosProducto.getTextTrim());
+                //}
                 
             }
             
         }catch(JDOMException | IOException exc){
             System.out.println("Error a la hora de agarrar el archivo XML especificado");
         }
-        return new ArrayList<>();
+        return arrayLProductos;
     }
     
     /**
@@ -267,5 +272,10 @@ public class Servidor {
     private static String eliminaUnderScores(String string){
         string = string.replaceAll("_", " ");
         return string;
+    }
+
+    @Override
+    public String toString() {
+        return "Servidor: \n" + "Activo: " + activo + ", pausado: " + pausado + ", productos: " + productos + ", pedidos: " + pedidos;
     }
 }
