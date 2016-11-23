@@ -21,7 +21,6 @@ public class Clientes extends javax.swing.JFrame {
      */
     public Clientes() {
         initComponents();
-        this.productos = new ArrayList<>();
         this.OffLine.setVisible(!this.conseguirProductos());
     }
 
