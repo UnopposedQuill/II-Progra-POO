@@ -45,6 +45,7 @@ public class Cliente {
                 System.out.println("Enviando mensaje");
                 this.flujoDeSalida.writeObject(aEnviar);
                 try{
+                    System.out.println("Mensaje recibido con éxito");
                     return (Mensaje) this.flujoDeEntrada.readObject();
                 }catch(ClassNotFoundException | ClassCastException exc){
                     System.out.println("Ocurrió un error a la hora de averiguar el mensaje retornado");

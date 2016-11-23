@@ -171,6 +171,7 @@ public class Servidor {
                 //ya tengo las conexiones hechas, ahora tengo que ver qué hago con lo que el cliente le envió al servidor
                 try{
                     Mensaje mensajeRecibido = (Mensaje)flujoDeEntrada.readObject();//consigo el mensaje enviado (o intento hacerlo)
+                    System.out.println("Atendiendo Petición");
                     atenderPeticion(mensajeRecibido);//hago que el servidor atienda la petición
                 }catch(ClassNotFoundException | ClassCastException excep){
                     System.out.println("Ocurrió un error a la hora de averiguar el mensaje enviado");
@@ -200,6 +201,7 @@ public class Servidor {
                 try{
                     mensajeAAtender.setDatoDeRespuesta(this.productos);
                     this.flujoDeSalida.writeObject(mensajeAAtender);
+                    System.out.println("Mensaje Retornado con Éxito");
                 }catch(IOException excep){
                     System.out.println("Hubo un error a la hora de enviar la respuesta");
                 }
@@ -210,11 +212,14 @@ public class Servidor {
                     try{
                         this.pedidos.add((Pedido) mensajeAAtender.getDatoDeSolicitud());
                         mensajeAAtender.setDatoDeRespuesta(true);
+                        System.out.println("Mensaje correctamente atendido");
                     }catch(ClassCastException exc){
                         System.out.println("Hubo un error a la hora de introducir el nuevo pedido en el servidor");
-                        mensajeAAtender.setDatoDeRespuesta(false);   
+                        mensajeAAtender.setDatoDeRespuesta(false);
+                        System.out.println("Mensaje incorrectamente atendido");
                     }
                     this.flujoDeSalida.writeObject(mensajeAAtender);
+                    System.out.println("Mensaje Retornado con Éxito");
                 }catch(IOException excep){
                     System.out.println("Hubo un error a la hora de enviar la respuesta");
                 }
