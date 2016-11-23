@@ -199,6 +199,7 @@ public class Servidor {
         switch(mensajeAAtender.getTipoDelMensaje()){
             case conseguirLista:{//se desea conseguir la lista completa de los productos
                 try{
+                    System.out.println("Era una petición de la lista de productos");
                     mensajeAAtender.setDatoDeRespuesta(this.productos);
                     this.flujoDeSalida.writeObject(mensajeAAtender);
                     System.out.println("Mensaje Retornado con Éxito");
@@ -210,6 +211,7 @@ public class Servidor {
             case nuevoPedido:{//se desea solicitar un nuevo pedido
                 try{
                     try{
+                        System.out.println("Era una petición para hacer un nuevo pedido");
                         this.pedidos.add((Pedido) mensajeAAtender.getDatoDeSolicitud());
                         mensajeAAtender.setDatoDeRespuesta(true);
                         System.out.println("Mensaje correctamente atendido");
