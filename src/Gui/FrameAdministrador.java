@@ -314,7 +314,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameAdministrador().setVisible(true);
+                FrameAdministrador ventana = new FrameAdministrador();
+                ventana.setVisible(true);
+                ventana.administrador.arrancarServidor();
             }
         });
     }
