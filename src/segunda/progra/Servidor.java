@@ -8,6 +8,8 @@ package segunda.progra;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 
@@ -222,9 +224,9 @@ public class Servidor {
                     }
                     this.flujoDeSalida.writeObject(mensajeAAtender);
                     System.out.println("Mensaje Retornado con Éxito");
-                }catch(IOException excep){
+                } catch (IOException ex) {
                     System.out.println("Hubo un error a la hora de enviar la respuesta");
-                }
+            }
                 break;
             }
             default:{

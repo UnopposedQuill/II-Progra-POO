@@ -5,11 +5,13 @@
  */
 package segunda.progra;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Esteban
  */
-public class Producto implements Cloneable{
+public class Producto implements Cloneable,Serializable{
 
     private String codigo;
     private String nombre;

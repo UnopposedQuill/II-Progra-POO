@@ -6,12 +6,13 @@
 package segunda.progra;
 
 import java.util.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Esteban
  */
-public class Pedido {
+public class Pedido implements Serializable{
     private Calendar fechaPedido;
     private ArrayList <Producto> productosPedidos;
 
