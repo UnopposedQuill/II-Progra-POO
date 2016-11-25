@@ -23,6 +23,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
     public FrameAdministrador() {
         initComponents();
         this.administrador = new Administrador(new Servidor());
+        this.administrador.arrancarServidor();
         this.jScrollPane1.setVisible(false);
         this.jScrollPane2.setVisible(false);
         this.LabelPedidos.setVisible(false);
@@ -316,7 +317,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
             public void run() {
                 FrameAdministrador ventana = new FrameAdministrador();
                 ventana.setVisible(true);
-                ventana.administrador.arrancarServidor();
             }
         });
     }

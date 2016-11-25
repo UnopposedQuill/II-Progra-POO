@@ -6,6 +6,7 @@
 package segunda.progra;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -123,6 +124,28 @@ public class Producto implements Cloneable,Serializable{
 
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        return Objects.equals(this.codigo, other.codigo);
     }
 
     /**

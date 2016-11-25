@@ -20,5 +20,4 @@ public class SegundaProgra {
         System.out.println(servidorPrueba.toString());
         servidorPrueba.correrServidor();
     }
-    
 }

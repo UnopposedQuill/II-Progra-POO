@@ -276,7 +276,7 @@ public class FrameClientes extends javax.swing.JFrame {
      * y los agrega a la lista que retorna, siendo los Producto del ArrayList los productos seleccionados
      * @return Un ArrayList con los productos que hayan sido seleccionados dentro de la ventana, (algún día)
      */
-    private ArrayList<Producto> conseguirProductosSeleccionados(){
+    private ArrayList<Producto[]> conseguirProductosSeleccionados(){
         return null;
     }
 }

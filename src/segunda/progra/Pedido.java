@@ -14,18 +14,18 @@ import java.io.Serializable;
  */
 public class Pedido implements Serializable{
     private Calendar fechaPedido;
-    private ArrayList <Producto> productosPedidos;
+    private ArrayList <Producto[]> productosPedidos;
 
-    public Pedido(ArrayList<Producto> productosPedidos) {
+    public Pedido(ArrayList<Producto[]> productosPedidos) {
         this.fechaPedido = Calendar.getInstance();
-        this.productosPedidos = productosPedidos;
+        this.productosPedidos = productosPedidos;        
     }
 
     public Calendar getFechaPedido() {
         return fechaPedido;
     }
 
-    public ArrayList<Producto> getProductosPedidos() {
+    public ArrayList<Producto[]> getProductosPedidos() {
         return productosPedidos;
     }
 }

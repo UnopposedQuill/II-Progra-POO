@@ -8,8 +8,8 @@ package segunda.progra;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 
@@ -17,7 +17,7 @@ import org.jdom2.input.SAXBuilder;
  *
  * @author Esteban
  */
-public class Servidor {
+public class Servidor extends Thread{
     
     private boolean activo;
     private boolean pausado;
@@ -37,7 +37,7 @@ public class Servidor {
      */
     public Servidor(ArrayList<Producto> productos) {
         this.activo = true;
-        this.pausado = true;
+        this.pausado = false;
         this.productos = productos;
         this.pedidos = new ArrayList();
     }
@@ -104,7 +104,7 @@ public class Servidor {
      */
     public void correrServidor(){
         this.activarServidor();
-        this.runServer();
+        this.start();
     }
 
     /**
@@ -155,7 +155,8 @@ public class Servidor {
      * Este método es el método que controla el servidor, lo que hace este método es que controla todas las nuevas conexiones
      * desde y hacia el servidor
      */
-    private void runServer(){
+    @Override
+    public void run(){
         try{
             //nuevo servidor
             this.serverSocket = new ServerSocket(5000);
