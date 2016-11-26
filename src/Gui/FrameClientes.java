@@ -56,6 +56,7 @@ public class FrameClientes extends JFrame {
         Error = new javax.swing.JLabel();
         OffLine = new javax.swing.JLabel();
         Cleaner = new javax.swing.JButton();
+        LabelCalorias = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
@@ -148,6 +149,8 @@ public class FrameClientes extends JFrame {
             }
         });
 
+        LabelCalorias.setText("Su pedido contiene: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,20 +158,7 @@ public class FrameClientes extends JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(OffLine, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Error, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkBoxExpress)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hacerPedido))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1341, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(614, 614, 614)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,12 +168,25 @@ public class FrameClientes extends JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(textFieldPersona, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
                             .addComponent(textFieldTelefono)
-                            .addComponent(textFieldDireccion))))
+                            .addComponent(textFieldDireccion)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(614, 614, 614)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(OffLine, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Error, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkBoxExpress)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hacerPedido))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(LabelCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Cleaner)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(626, 626, 626)
-                .addComponent(Cleaner)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +196,9 @@ public class FrameClientes extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Cleaner)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cleaner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textFieldPersona)
@@ -220,7 +225,7 @@ public class FrameClientes extends JFrame {
 
     private void hacerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hacerPedidoActionPerformed
         // TODO add your handling code here:
-        this.Error.setVisible(this.enviarPedido());
+        this.Error.setVisible(!this.enviarPedido());
         this.Cleaner.doClick();
     }//GEN-LAST:event_hacerPedidoActionPerformed
 
@@ -283,6 +288,7 @@ public class FrameClientes extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cleaner;
     private javax.swing.JLabel Error;
+    private javax.swing.JLabel LabelCalorias;
     private javax.swing.JLabel OffLine;
     private javax.swing.JCheckBox checkBoxExpress;
     private javax.swing.JButton hacerPedido;
@@ -311,8 +317,20 @@ public class FrameClientes extends JFrame {
      * @return Si se pudo enviar o no al servidor, True si lo logró, False en el otro caso
      */
     private boolean enviarPedido(){
-        Cliente cliente = new Cliente();
-        return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(),this.conseguirCantidadProductosSeleccionados()));
+        //return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(),this.conseguirCantidadProductosSeleccionados()));
+        //¿Pedido nulo?
+        if(!this.conseguirProductosSeleccionados().isEmpty() && !this.textFieldTelefono.getText().equals("") && !this.textFieldPersona.getText().equals("")){
+            //hacer pedido
+            if(this.checkBoxExpress.isSelected() && this.textFieldDireccion.getText().equals("")){
+                return false;
+            }
+            Cliente cliente = new Cliente();
+            if(this.checkBoxExpress.isSelected()){
+                return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(), textFieldDireccion.getText()));
+            }
+            return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText()));
+        }
+        return false;
     }
     
     /**

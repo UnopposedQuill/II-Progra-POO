@@ -16,11 +16,56 @@ public class Pedido implements Serializable{
     private Calendar fechaPedido;
     private ArrayList <Producto> productosPedidos;
     private int [] cantidadesProductos;
+    private String nombre;
+    private String numTelefono;
+    private String direccion;
 
+    /**
+     * Este es el constructor para los pedidos express, este recibe todos los parámetros completos
+     * @param productosPedidos Un ArrayList con los productos que se desean
+     * @param cantidadesProductos Un arreglo de enteros con la cantidad de productos que se desean
+     * @param nombre El nombre de la persona responsable por el pedido
+     * @param numTelefono El número de teléfono de la persona responsable por el pedido
+     * @param direccion La dirección de la persona responsable por el pedido
+     */
+    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono, String direccion) {
+        this.fechaPedido = Calendar.getInstance();
+        this.productosPedidos = productosPedidos;
+        this.cantidadesProductos = cantidadesProductos;
+        this.nombre = nombre;
+        this.numTelefono = numTelefono;
+        this.direccion = direccion;
+    }
+
+    /**
+     * Este es el constructor para los pedidos normales, este recibe todos los parámetros menos la dirección
+     * @param productosPedidos Un ArrayList con los productos que se desean
+     * @param cantidadesProductos Un arreglo de enteros con la cantidad de productos que se desean
+     * @param nombre El nombre de la persona responsable por el pedido
+     * @param numTelefono El número de teléfono de la persona responsable por el pedido
+     */
+    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono) {
+        this.fechaPedido = Calendar.getInstance();
+        this.productosPedidos = productosPedidos;
+        this.cantidadesProductos = cantidadesProductos;
+        this.nombre = nombre;
+        this.numTelefono = numTelefono;
+        this.direccion = null;
+    }
+
+    /**
+     * Este es el constructor para los pedidos de prueba, este no toma los datos personales, por eso no se puede usar
+     * @param productosPedidos Un ArrayList con los productos que se desean
+     * @param cantidadProductos Un arreglo de enteros con la cantidad de productos que se desean
+     * @deprecated Luego de mejorar el servidor
+     */
     public Pedido(ArrayList<Producto> productosPedidos,int[] cantidadProductos) {
         this.fechaPedido = Calendar.getInstance();
         this.productosPedidos = productosPedidos;        
         this.cantidadesProductos = cantidadProductos;
+        this.nombre = null;
+        this.numTelefono = null;
+        this.direccion = null;
     }
 
     public Calendar getFechaPedido() {
@@ -52,5 +97,13 @@ public class Pedido implements Serializable{
             }
         }
         return false;
+    }
+    
+    /**
+     * Este método averigua si el pedido es express
+     * @return True si el pedido es express, False en el otro caso
+     */
+    public boolean isExpress(){
+        return this.direccion != null;
     }
 }

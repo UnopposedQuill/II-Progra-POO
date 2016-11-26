@@ -61,6 +61,7 @@ public class Servidor extends Thread{
         this.pausado = false;
         this.productos = this.conseguirProductosXML("Productos.xml");
         this.pedidos = new ArrayList();
+        System.out.println(this.toString());
     }
     
     /**
