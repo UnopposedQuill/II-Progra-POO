@@ -34,4 +34,23 @@ public class Pedido implements Serializable{
     public int[] getCantidadProductos() {
         return cantidadesProductos;
     }
+    
+    /**
+     * Este método averigua si el pedido es nulo, puesto que la cantidad de productos seleccionados podría ser 0
+     * @return True si los productos están vacíos y/o las cantidades están vacías, False si es posible utilizarlo
+     */
+    public boolean isNull(){
+        if(this.productosPedidos.isEmpty()){
+            return true;
+        }
+        if(this.cantidadesProductos.length == 0){
+            return true;
+        }
+        for (int i = 0; i < this.cantidadesProductos.length; i++) {
+            if(cantidadesProductos[i] == 0){
+                return true;
+            }
+        }
+        return false;
+    }
 }

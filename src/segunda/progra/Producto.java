@@ -61,6 +61,18 @@ public class Producto implements Cloneable,Serializable{
         this.precio = precio;
         this.habilitado = true;
     }
+    
+    public Producto(String codigo){
+        this.codigo = codigo;
+        this.nombre = null;
+        this.descripcion = null;
+        this.tamanhoPorcion = -1;
+        this.piezasPorcion = -1;
+        this.caloriasPorcion = -1;
+        this.caloriasPieza = -1;
+        this.precio = -1;
+        this.habilitado = false;
+    }
 
     public String getCodigo() {
         return codigo;
