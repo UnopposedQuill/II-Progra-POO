@@ -19,6 +19,7 @@ public class Pedido implements Serializable{
     private String nombre;
     private String numTelefono;
     private String direccion;
+    private int ID;
 
     /**
      * Este es el constructor para los pedidos express, este recibe todos los parámetros completos
@@ -35,6 +36,7 @@ public class Pedido implements Serializable{
         this.nombre = nombre;
         this.numTelefono = numTelefono;
         this.direccion = direccion;
+        this.ID = -1;
     }
 
     /**
@@ -51,6 +53,7 @@ public class Pedido implements Serializable{
         this.nombre = nombre;
         this.numTelefono = numTelefono;
         this.direccion = null;
+        this.ID = -1;
     }
 
     /**
@@ -66,6 +69,7 @@ public class Pedido implements Serializable{
         this.nombre = null;
         this.numTelefono = null;
         this.direccion = null;
+        this.ID = -1;
     }
 
     public Calendar getFechaPedido() {
@@ -78,6 +82,14 @@ public class Pedido implements Serializable{
 
     public int[] getCantidadProductos() {
         return cantidadesProductos;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
     
     /**
@@ -105,5 +117,19 @@ public class Pedido implements Serializable{
      */
     public boolean isExpress(){
         return this.direccion != null;
+    }
+
+    @Override
+    public String toString(){
+        return "Pedido el: " + fechaPedido + ", productos pedidos: " + productosPedidos + ", cantidad de productos pedidos: " + cantidadTotal(cantidadesProductos) + ", nombre: " + nombre + ", número de teléfono: " + numTelefono + ", dirección: " + direccion + ", identificador del pedido: " + ID;
+    }
+    
+    public static int cantidadTotal(int []arreglo){
+        int contador = 0;
+        for (int i = 0; i < arreglo.length; i++) {
+            int j = arreglo[i];
+            contador += j;
+        }
+        return contador;
     }
 }

@@ -11,7 +11,8 @@ import java.util.*;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 import org.jdom2.*;
-import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.*;
+import org.jdom2.output.*;
 
 /**
  *
@@ -149,7 +150,54 @@ public class Servidor extends Thread{
         if(this.productos.contains(nuevoProducto)){
             return false;
         }
-        return this.productos.add(nuevoProducto);
+        boolean resultado = this.productos.add(nuevoProducto);
+        if(resultado){
+            this.guardarProductos();
+        }
+        return resultado;
+    }
+    
+    /**
+     * Este método revisa todos los pedidos y averigua el pedido con el ID más alto
+     * @return Un entero con el ID más alto, -1 es el valor para "no hay pedidos"
+     */
+    public int conseguirUltimoID(){
+        if(this.pedidos.isEmpty()){ 
+            return -1;
+        }
+        Pedido get = pedidos.get(0);
+        for (int i = 0; i < pedidos.size(); i++) {
+            get = pedidos.get(i);
+            if(get.getID() == -1 && i == 0){
+                return -1;
+            }
+            if(get.getID() == -1){
+                return pedidos.get(i-1).getID();
+            }
+        }
+        return get.getID();
+    }
+    
+    /**
+     * Este método actualiza todos los id de los pedidos de la lista de pedidos
+     */
+    public void actualizarIDPedidos(){
+        int IDMaximo = this.conseguirUltimoID()+1;
+        for (int i = 0; i < this.pedidos.size(); i++) {
+            Pedido pedidoActual = this.pedidos.get(i);
+            if(pedidoActual.getID() == -1){
+                pedidoActual.setID(IDMaximo);
+                IDMaximo++;
+            }
+        }
+        System.out.println(this.pedidos);
+    }
+    
+    /**
+     * Método para guardar los productos en una locación por default
+     */
+    public void guardarProductos(){
+        this.guardarProductosXML("Productos.xml");
     }
     
     /**
@@ -217,6 +265,7 @@ public class Servidor extends Thread{
                     try{
                         System.out.println("Era una petición para hacer un nuevo pedido");
                         this.pedidos.add((Pedido) mensajeAAtender.getDatoDeSolicitud());
+                        this.actualizarIDPedidos();
                         mensajeAAtender.setDatoDeRespuesta(true);
                         System.out.println("Mensaje correctamente atendido");
                     }catch(ClassCastException exc){
@@ -266,13 +315,66 @@ public class Servidor extends Thread{
                 //for (Element elementosProducto : listaElementos) {
                 //    System.out.println(elementosProducto.getTextTrim());
                 //}
-                
             }
-            
         }catch(JDOMException | IOException exc){
             System.out.println("Error a la hora de agarrar el archivo XML especificado");
         }
         return arrayLProductos;
+    }
+    
+    /**
+     * Este método se usa para guardar los productos del servidor en un archivo .xml a salvo
+     * @param XML El nombre del XML donde se desea guardar los productos
+     */
+    private void guardarProductosXML(String XML){
+        //Defino una nueva etiqueta con cabecera para guardar los productos
+        Element root = new Element("Productos");
+        
+        //recorro toda la lista de productos para guardar los productos
+        for (int i = 0; i < productos.size(); i++) {
+            Producto get = productos.get(i);
+            //El elemento que va a contener todos los datos del producto
+            Element producto = new Element(colocaUnderScores(get.getNombre()));
+            
+            //Ahora llenaré los datos del producto dentro de su elemento
+            Element codigo = new Element("Codigo");
+            codigo.addContent(get.getCodigo());
+            producto.addContent(codigo);
+            
+            Element descripcion = new Element("Descripcion");
+            descripcion.addContent(get.getDescripcion());
+            producto.addContent(descripcion);
+            
+            Element tamanhoPorcion = new Element("TamanhoPorcion");
+            tamanhoPorcion.addContent(get.getDescripcion());
+            producto.addContent(tamanhoPorcion);
+            
+            Element piezaPorPorcion = new Element("PiezasPorPorcion");
+            piezaPorPorcion.addContent(String.valueOf(get.getPiezasPorcion()));
+            producto.addContent(piezaPorPorcion);
+            
+            Element caloriasEnUnaPorcion = new Element("CaloriasEnUnaPorcion");
+            caloriasEnUnaPorcion.addContent(String.valueOf(get.getCaloriasPorcion()));
+            producto.addContent(caloriasEnUnaPorcion);
+            
+            Element caloriasPorPieza = new Element("CaloriasPorPieza");
+            caloriasPorPieza.addContent(String.valueOf(get.getCaloriasPieza()));
+            producto.addContent(caloriasPorPieza);
+            
+            Element precio = new Element("Precio");
+            precio.addContent(String.valueOf(get.getPrecio()));
+            producto.addContent(precio);
+            
+            //agrego el producto a la raíz del XML
+            root.addContent(producto);
+        }
+        //ahora sólo falta guardarlo
+        XMLOutputter outputterXML = new XMLOutputter(Format.getPrettyFormat());
+        try{
+          outputterXML.output(new Document(root), new FileOutputStream(XML));
+        } catch (IOException e){
+            System.out.println("Ocurrió un error a la hora de guardar el XML");
+        }
     }
     
     /**
@@ -285,6 +387,16 @@ public class Servidor extends Thread{
         return string;
     }
 
+    /**
+     * Este método se usa para cambiar los espacios en blanco por un underscore '_'
+     * @param string El string del cual se van a cambiar los espacios en blanco
+     * @return El string sin espacios en blanco
+     */
+    private static String colocaUnderScores(String string){
+        string = string.replaceAll(" ", "_");
+        return string;
+    }
+    
     @Override
     public String toString() {
         return "Servidor: \n" + "Activo: " + activo + ", pausado: " + pausado + ", productos: " + productos + ", pedidos: " + pedidos;

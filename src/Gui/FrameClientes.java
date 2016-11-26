@@ -25,6 +25,7 @@ public class FrameClientes extends JFrame {
      */
     public FrameClientes() {
         initComponents();
+        this.LabelCalorias.setVisible(false);
         boolean offline = !this.conseguirProductos();
         this.OffLine.setVisible(offline);
         if(!offline){
@@ -106,6 +107,11 @@ public class FrameClientes extends JFrame {
             }
         });
         jTableProductos.getTableHeader().setReorderingAllowed(false);
+        jTableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProductos);
         if (jTableProductos.getColumnModel().getColumnCount() > 0) {
             jTableProductos.getColumnModel().getColumn(0).setResizable(false);
@@ -247,6 +253,19 @@ public class FrameClientes extends JFrame {
         this.textFieldTelefono.setText("");
         this.textFieldDireccion.setText("");
     }//GEN-LAST:event_CleanerActionPerformed
+
+    private void jTableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductosMouseClicked
+        // TODO add your handling code here:
+        this.LabelCalorias.setVisible(true);
+        TableModel modeloTabla = this.jTableProductos.getModel();
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
+            if(checkBoxSeleccionado.isSelected()){
+                JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
+                
+            }
+        }
+    }//GEN-LAST:event_jTableProductosMouseClicked
 
     /**
      * @param args the command line arguments
