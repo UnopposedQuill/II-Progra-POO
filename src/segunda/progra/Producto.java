@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- *
+ * Esta es la clase de los productos
  * @author Esteban
  */
 public class Producto implements Cloneable,Serializable{

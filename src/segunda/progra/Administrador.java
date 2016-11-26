@@ -20,7 +20,7 @@ public class Administrador {
      * @param server El servidor que se va a usar
      */
     public Administrador(Servidor server) {
-        this.servidor = new Servidor(new ArrayList<>());
+        this.servidor = server;
     }
     
     /**

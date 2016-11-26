@@ -34,7 +34,7 @@ public enum Tipo {
         }
     }
     
-    static String fakeToString(Tipo tipo){
+    public static String fakeToString(Tipo tipo){
         switch(tipo){
             case ENT:{
                 return "Entrada";
