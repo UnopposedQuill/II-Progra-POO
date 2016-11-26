@@ -74,32 +74,32 @@ public class FrameClientes extends JFrame {
 
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Seleccionado", "Cantidad", "Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción", "Calorías por Pieza", "Calorías por porción", "Codigo"
+                "Seleccionado", "Cantidad", "Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción", "Calorías por Pieza", "Calorías por porción", "Precio", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, false, true, false, false, false, true, true, true
+                true, true, false, true, false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,6 +110,11 @@ public class FrameClientes extends JFrame {
         jTableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableProductosMouseClicked(evt);
+            }
+        });
+        jTableProductos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTableProductosPropertyChange(evt);
             }
         });
         jScrollPane1.setViewportView(jTableProductos);
@@ -252,20 +257,29 @@ public class FrameClientes extends JFrame {
         this.textFieldPersona.setText("");
         this.textFieldTelefono.setText("");
         this.textFieldDireccion.setText("");
+        this.LabelCalorias.setVisible(false);
     }//GEN-LAST:event_CleanerActionPerformed
 
     private void jTableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductosMouseClicked
         // TODO add your handling code here:
         this.LabelCalorias.setVisible(true);
+        int cantidadCalorias = 0;
+        int precio = 0;
         TableModel modeloTabla = this.jTableProductos.getModel();
         for (int i = 0; i < modeloTabla.getRowCount(); i++) {
             JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
             if(checkBoxSeleccionado.isSelected()){
                 JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
-                
+                precio += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 9);
+                cantidadCalorias += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 7);
             }
         }
+        this.LabelCalorias.setText("Su pedido contiene: " + cantidadCalorias + " calorías, con un coste de: " + precio + " colones");
     }//GEN-LAST:event_jTableProductosMouseClicked
+
+    private void jTableProductosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableProductosPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableProductosPropertyChange
 
     /**
      * @param args the command line arguments
@@ -356,7 +370,7 @@ public class FrameClientes extends JFrame {
      * Este método lo que hace es actualizar la tabla de los productos según los productos que se tienen en el sistema
      */
     private void llenarTabla(){
-        Object[][] datosProductos = new Object[this.productos.size()][10];
+        Object[][] datosProductos = new Object[this.productos.size()][11];
         
         for (int i = 0; i < productos.size(); i++) {
             Producto getProducto = productos.get(i);
@@ -369,10 +383,11 @@ public class FrameClientes extends JFrame {
             datosProductos[i][6] = getProducto.getPiezasPorcion();
             datosProductos[i][7] = getProducto.getCaloriasPieza();
             datosProductos[i][8] = getProducto.getCaloriasPorcion();
-            datosProductos[i][9] = getProducto.getCodigo();
+            datosProductos[i][9] = getProducto.getPrecio();
+            datosProductos[i][10] = getProducto.getCodigo();
         }
         
-        String [] nombreCol = {"Seleccionado", "Cantidad", "Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción","Calorías Por Pieza","Calorías Por Porción","Código"};
+        String [] nombreCol = {"Seleccionado", "Cantidad", "Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción","Calorías Por Pieza","Calorías Por Porción","Precio","Código"};
         
         this.jTableProductos.setModel(new DefaultTableModel(datosProductos, nombreCol){
             //a partir de aquí me pongo a modificar algunos aspectos del modelo
@@ -391,6 +406,8 @@ public class FrameClientes extends JFrame {
             Object.class,            
             Object.class,
             Object.class,            
+            Object.class,
+            Object.class,
             Object.class,
             Object.class,
             Object.class,
@@ -458,6 +475,7 @@ public class FrameClientes extends JFrame {
                     JCheckBox checkBoxAModificar = (JCheckBox)jTableProductos.getValueAt(fila, columna);
                     checkBoxAModificar.doClick();
                     jTableProductos.setValueAt(checkBoxAModificar, fila, columna);
+                    jTableProductosMouseClicked(e);
                 }
                 /**
                  * Pregunto si hizo clic sobre la celda que contiene el JSpinner de la fila
@@ -468,6 +486,7 @@ public class FrameClientes extends JFrame {
                     modeloAModificar.setValue(modeloAModificar.getNextValue());
                     jSpinnerAModificar.setModel(modeloAModificar);
                     jTableProductos.setValueAt(jSpinnerAModificar, fila, columna);
+                    jTableProductosMouseClicked(e);
                 }
             }
         });
@@ -486,7 +505,7 @@ public class FrameClientes extends JFrame {
             JCheckBox checkBoxSeleccionada = (JCheckBox)modeloTabla.getValueAt(i, 0);
             //¿Está seleccionado?
             if(checkBoxSeleccionada.isSelected()){
-                productosSeleccionados.add(this.productos.get(this.productos.indexOf(new Producto((String)modeloTabla.getValueAt(i, 9)))));
+                productosSeleccionados.add(this.productos.get(this.productos.indexOf(new Producto((String)modeloTabla.getValueAt(i, 10)))));
             }
         }
         return productosSeleccionados;

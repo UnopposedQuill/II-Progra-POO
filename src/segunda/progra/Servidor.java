@@ -24,6 +24,7 @@ public class Servidor extends Thread{
     private boolean pausado;
     private ArrayList <Producto> productos;
     private ArrayList <Pedido> pedidos;
+    private ArrayList <Conexion> conexiones;
     
     //Campos de las conexiones del servidor
     private ServerSocket serverSocket;
@@ -41,6 +42,7 @@ public class Servidor extends Thread{
         this.pausado = false;
         this.productos = productos;
         this.pedidos = new ArrayList();
+        this.conexiones = new ArrayList<>();
     }
     
     /**
@@ -52,6 +54,7 @@ public class Servidor extends Thread{
         this.pausado = false;
         this.productos = this.conseguirProductosXML(XML);
         this.pedidos = new ArrayList();
+        this.conexiones = new ArrayList<>();
     }
     
     /**
@@ -62,6 +65,7 @@ public class Servidor extends Thread{
         this.pausado = false;
         this.productos = this.conseguirProductosXML("Productos.xml");
         this.pedidos = new ArrayList();
+        this.conexiones = new ArrayList<>();
         System.out.println(this.toString());
     }
     
@@ -140,6 +144,10 @@ public class Servidor extends Thread{
     public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
+
+    public ArrayList<Conexion> getConexiones() {
+        return conexiones;
+    }
     
     /**
      * Esto es para agregar un nuevo producto a la base de datos del servidor, esta base de datos no admite ningún producto repetido
@@ -213,6 +221,7 @@ public class Servidor extends Thread{
             while(this.activo){
                 System.out.println("Servidor en espera por una nueva conexión");
                 Socket socketNuevo = serverSocket.accept();//consigo el nuevo socket que haya deseado conectarse
+                System.out.println("Detectada nueva conexión");
                 //ahora las conexiones de entrada y de salida del servidor
                 System.out.println("Haciendo nuevas conexiones");
                 this.conexionSalida = socketNuevo.getOutputStream();
@@ -223,6 +232,8 @@ public class Servidor extends Thread{
                 //ya tengo las conexiones hechas, ahora tengo que ver qué hago con lo que el cliente le envió al servidor
                 try{
                     Mensaje mensajeRecibido = (Mensaje)flujoDeEntrada.readObject();//consigo el mensaje enviado (o intento hacerlo)
+                    System.out.println("Agregando mensaje al registro");
+                    this.conexiones.add(new Conexion(socketNuevo.getLocalAddress(), socketNuevo.getInetAddress(), mensajeRecibido.getTipoDelMensaje()));
                     System.out.println("Atendiendo Petición");
                     atenderPeticion(mensajeRecibido);//hago que el servidor atienda la petición
                 }catch(ClassNotFoundException | ClassCastException excep){

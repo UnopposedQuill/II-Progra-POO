@@ -93,11 +93,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="LabelPedidos" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="104" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="122" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="observarRelacionPorcentual" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="observarMejoresProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="observarPeoresProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -105,12 +105,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="modificarProducto" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="agregarNuevoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="observarTodosProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -126,12 +126,24 @@
         <Component class="javax.swing.JTable" name="IP">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="1" rowCount="4">
-                <Column editable="true" title="Direcci&#xf3;n IP" type="java.lang.Object"/>
+              <Table columnCount="3" rowCount="5">
+                <Column editable="true" title="Direcci&#xf3;n IP Global" type="java.lang.Object"/>
+                <Column editable="true" title="Direcci&#xf3;n IP Local" type="java.lang.Object"/>
+                <Column editable="true" title="Tipo de Solicitud" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -159,10 +171,10 @@
         <Component class="javax.swing.JTable" name="Pedidos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="6" rowCount="6">
                 <Column editable="false" title="Persona" type="java.lang.Object"/>
                 <Column editable="true" title="N&#xfa;mero de Tel&#xe9;fono" type="java.lang.Object"/>
-                <Column editable="false" title="Costo ($)" type="java.lang.Object"/>
+                <Column editable="false" title="Precio" type="java.lang.Object"/>
                 <Column editable="true" title="Direcci&#xf3;n" type="java.lang.Object"/>
                 <Column editable="true" title="Cantidad De Productos" type="java.lang.Object"/>
                 <Column editable="true" title="Productos" type="java.lang.Object"/>

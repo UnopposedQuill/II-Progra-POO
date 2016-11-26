@@ -13,4 +13,18 @@ import java.io.Serializable;
  */
 public enum TipoMensaje implements Serializable{
     conseguirLista,nuevoPedido;
+    
+    public String getRepString(){
+        switch(this){
+            case conseguirLista:{
+                return "Conseguir Lista";
+            }
+            case nuevoPedido:{
+                return "Nuevo Pedido";
+            }
+            default:{
+                return "NULL";
+            }
+        }
+    }
 }

@@ -91,6 +91,20 @@ public class Pedido implements Serializable{
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getNumTelefono() {
+        return numTelefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+    
+    
     
     /**
      * Este método averigua si el pedido es nulo, puesto que la cantidad de productos seleccionados podría ser 0
@@ -124,6 +138,12 @@ public class Pedido implements Serializable{
         return "Pedido el: " + fechaPedido + ", productos pedidos: " + productosPedidos + ", cantidad de productos pedidos: " + cantidadTotal(cantidadesProductos) + ", nombre: " + nombre + ", número de teléfono: " + numTelefono + ", dirección: " + direccion + ", identificador del pedido: " + ID;
     }
     
+    /**
+     * Este método se enfoca en sumar todas los números en cada posición del arreglo recibido, para averiguar cuantos
+     * eran en total
+     * @param arreglo El arreglo del cuál se desea saber el número total
+     * @return Un entero que contiene la cantidad de unidades en todas las posiciones
+     */
     public static int cantidadTotal(int []arreglo){
         int contador = 0;
         for (int i = 0; i < arreglo.length; i++) {

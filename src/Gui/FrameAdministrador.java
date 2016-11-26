@@ -17,13 +17,26 @@ import segunda.progra.*;
 public class FrameAdministrador extends javax.swing.JFrame {
 
     private Administrador administrador;
+    private HiloActualizador hiloPedidos;
+    private HiloActualizador hiloConexiones;
+    
     /**
      * Creates new form Administrador
      */
     public FrameAdministrador() {
         initComponents();
+        //creo el nuevo administrador desde 0
         this.administrador = new Administrador(new Servidor());
+        //ahora defino los hilos que actualizarán las tablas de la ventana del administrador
+        //por ahora irán aquí, luego de que implemente el login, irán luego del mismo
+        this.hiloConexiones = new HiloActualizador(this.administrador.getServidor().getConexiones(), this.IP);
+        this.hiloPedidos = new HiloActualizador(this.administrador.getServidor().getPedidos(), this.Pedidos);
+        //arranco los 3 hilos que tiene la ventana: los pedidos, conexiones y el más importante, el servidor
+        this.hiloConexiones.start();
+        this.hiloPedidos.start();
         this.administrador.arrancarServidor();
+        
+        //Esto es para que cuando se arranque la ventana, aparezca una sólo el login
         this.jScrollPane1.setVisible(false);
         this.jScrollPane2.setVisible(false);
         this.LabelPedidos.setVisible(false);
@@ -71,13 +84,14 @@ public class FrameAdministrador extends javax.swing.JFrame {
 
         IP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Dirección IP"
+                "Dirección IP Global", "Dirección IP Local", "Tipo de Solicitud"
             }
         ));
         this.LabelConexiones.setVisible(false);
@@ -91,10 +105,12 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Persona", "Número de Teléfono", "Costo ($)", "Dirección", "Cantidad De Productos", "Productos"
+                "Persona", "Número de Teléfono", "Precio", "Dirección", "Cantidad De Productos", "Productos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -213,7 +229,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,7 +242,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(agregarNuevoProducto)
                         .addComponent(observarTodosProductos)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
