@@ -295,7 +295,7 @@ public class FrameClientes extends JFrame {
      */
     private boolean enviarPedido(){
         Cliente cliente = new Cliente();
-        return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados()));
+        return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(),this.conseguirCantidadProductosSeleccionados()));
     }
     
     /**
@@ -424,7 +424,16 @@ public class FrameClientes extends JFrame {
      * y los agrega a la lista que retorna, siendo los Producto del ArrayList los productos seleccionados
      * @return Un ArrayList con los productos que hayan sido seleccionados dentro de la ventana, (algún día)
      */
-    private ArrayList<Producto[]> conseguirProductosSeleccionados(){
+    private ArrayList<Producto> conseguirProductosSeleccionados(){
         return null;
+    }
+    
+    /**
+     * Este método lo que hace es que recorre toda la tabla de productos para conseguir la cantidad de los productos
+     * seleccionados en la misma
+     * @return Un arreglo que contiene la cantidad de los productos seleccionados
+     */
+    private int[] conseguirCantidadProductosSeleccionados(){
+        return new int[1];
     }
 }
