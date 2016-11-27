@@ -453,6 +453,31 @@ public class Servidor extends Thread{
     }
     
     /**
+     * Este método busca entre la lista de pedidos cuántas veces se ordenó un producto específico
+     * @param productoABuscar El producto que se va a buscar
+     * @return Un entero con la cantidad de veces que se pidió
+     */
+    public int conseguirCantidadVecesPedido(Producto productoABuscar){
+        int resultado = 0;
+        
+        //para cada pedido
+        for (int i = 0; i < this.pedidos.size(); i++) {
+            Pedido getPedido = this.pedidos.get(i);
+            
+            //para cada producto en cada pedido
+            for (int j = 0; j < getPedido.getProductosPedidos().size(); j++) {
+                Producto getProductoPedido = getPedido.getProductosPedidos().get(j);
+                //si alguno de los productos coincide
+                if(getProductoPedido.equals(productoABuscar)){
+                    //sume la cantidad de veces que se pidió al resultado
+                    resultado += getPedido.getCantidadProductos()[j];
+                }
+            }
+        }
+        return resultado;//retorne
+    }
+    
+    /**
      * Este método se usa para cambiar los underscores ('_') de un string por un espacio en blanco
      * @param string El string del cual se van a cambiar los underscores
      * @return El string sin underscores

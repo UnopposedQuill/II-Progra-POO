@@ -30,10 +30,12 @@ public class TodosLosProductos extends javax.swing.JFrame {
      */
     public TodosLosProductos(ArrayList <Producto> productos,Servidor server) {
         initComponents();
-        Object[][] datosProductos = new Object[productos.size()][10];
+        Object[][] datosProductos = new Object[productos.size()][11];
         
         for (int i = 0; i < productos.size(); i++) {
             Producto getProducto = productos.get(i);
+            
+            
             datosProductos[i][0] = getProducto.getNombre();
             datosProductos[i][1] = getProducto.getDescripcion();
             datosProductos[i][2] = Tipo.fakeToString(getProducto.getTipo());
@@ -42,11 +44,12 @@ public class TodosLosProductos extends javax.swing.JFrame {
             datosProductos[i][5] = getProducto.getCaloriasPieza();
             datosProductos[i][6] = getProducto.getCaloriasPorcion();
             datosProductos[i][7] = getProducto.getPrecio();
-            datosProductos[i][8] = getProducto.getCodigo();
-            datosProductos[i][9] = new JButton("Modificar");
+            datosProductos[i][8] = server.conseguirCantidadVecesPedido(getProducto);
+            datosProductos[i][9] = getProducto.getCodigo();
+            datosProductos[i][10] = new JButton("Modificar");
         }
         
-        String [] nombreCol = {"Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción","Calorías Por Pieza","Calorías Por Porción","Precio","Código","Modificar"};
+        String [] nombreCol = {"Nombre", "Descripción", "Tipo", "Tamaño Porción", "Piezas Porción","Calorías Por Pieza","Calorías Por Porción","Precio","Cantidad Veces Pedido","Código","Modificar"};
         
         this.jTableProductos.setModel(new DefaultTableModel(datosProductos, nombreCol){
             //a partir de aquí me pongo a modificar algunos aspectos del modelo
@@ -65,6 +68,7 @@ public class TodosLosProductos extends javax.swing.JFrame {
                 Integer.class,
                 Integer.class,
                 
+                Integer.class,
                 String.class,
                 JButton.class
                 };
