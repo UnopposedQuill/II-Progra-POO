@@ -20,6 +20,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private Administrador administrador;
     private HiloActualizador hiloPedidos;
     private HiloActualizador hiloConexiones;
+    private HiloActualizador hiloCantidadPedidos;
     
     /**
      * Creates new form Administrador
@@ -72,6 +73,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
         PorcentajeExpress = new javax.swing.JTextField();
         LabelEmpaque = new javax.swing.JLabel();
         Error = new javax.swing.JLabel();
+        CantidadTotalPedidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -200,6 +202,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
 
         Error.setText("Error al Iniciar Sesión");
 
+        CantidadTotalPedidos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        CantidadTotalPedidos.setText("Cantidad Total Actual de Pedidos: 0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,7 +219,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LabelConexiones)
-                                    .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -234,7 +238,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
                                 .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(LabelEmpaque, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(134, 134, 134)
                         .addComponent(PorcentajeExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -245,7 +249,11 @@ public class FrameAdministrador extends javax.swing.JFrame {
                             .addComponent(observarPeoresProductos, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(agregarNuevoProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(96, 96, 96)
-                        .addComponent(observarRelacionPorcentual)))
+                        .addComponent(observarRelacionPorcentual))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CantidadTotalPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -273,7 +281,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CantidadTotalPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,9 +320,11 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 //creo los hilos de actualizaciones
                 this.hiloConexiones = new HiloActualizador(this.administrador.getServidor().getConexiones(), this.IP);
                 this.hiloPedidos = new HiloActualizador(this.administrador.getServidor().getPedidos(), this.Pedidos);
+                this.hiloCantidadPedidos = new HiloActualizador(this.administrador.getServidor().getPedidos(), this.CantidadTotalPedidos);
                 //arranco los hilos que tiene la ventana: los pedidos y conexiones
                 this.hiloConexiones.start();
                 this.hiloPedidos.start();
+                this.hiloCantidadPedidos.start();
                 //ahora los labels
                 this.setVisibilidadSesion(true);
             }
@@ -339,9 +351,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
         Object [][] datos = new Object[1][3];
         int[]porcentajes = this.porcentaje(this.cantidadPedidosARecoger(), this.cantidadTotalPedidosEnSitio(), this.cantidadTotalPedidosExpress());
         
-        datos[0][0] = porcentajes[0];
-        datos[0][1] = porcentajes[1];
-        datos[0][2] = porcentajes[2];
+        datos[0][0] = String.valueOf(porcentajes[0]).concat("%");
+        datos[0][1] = String.valueOf(porcentajes[1]).concat("%");
+        datos[0][2] = String.valueOf(porcentajes[2]).concat("%");
         
         String[] columnas = {"Pedidos A Recoger", "Pedidos En Sitio", "Pedidos Express"};
         DefaultTableModel modeloTablaPorcentajes = new DefaultTableModel(datos, columnas);
@@ -453,6 +465,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Administrador;
+    private javax.swing.JLabel CantidadTotalPedidos;
     private javax.swing.JPasswordField Contraseña;
     private javax.swing.JLabel Error;
     private javax.swing.JTable IP;
@@ -580,6 +593,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
             this.observarRelacionPorcentual.setVisible(true);
             this.agregarNuevoProducto.setVisible(true);
             this.observarTodosProductos.setVisible(true);
+            this.CantidadTotalPedidos.setVisible(true);
         }
         else{
             this.Error.setVisible(false);
@@ -602,6 +616,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
             this.observarRelacionPorcentual.setVisible(false);
             this.agregarNuevoProducto.setVisible(false);
             this.observarTodosProductos.setVisible(false);
+            this.CantidadTotalPedidos.setVisible(false);
         }
     }
     

@@ -121,7 +121,7 @@ public class TodosLosProductos extends javax.swing.JFrame {
                 if (jTableProductos.getModel().getColumnClass(columna).equals(JButton.class)) {
                     //significa que sí dio en el botón, por lo que hago que dibuje la ventana administradora de
                     //productos
-                    AgenteProductos modificadorProductos = new AgenteProductos(server, productos.get(productos.indexOf(new Producto((String)jTableProductos.getValueAt(fila, 8)))));
+                    AgenteProductos modificadorProductos = new AgenteProductos(server, productos.get(productos.indexOf(new Producto((String)jTableProductos.getValueAt(fila, 9)))));
                     modificadorProductos.setVisible(true);
                 }
             }
