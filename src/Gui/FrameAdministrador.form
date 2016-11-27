@@ -194,10 +194,10 @@
               <Table columnCount="6" rowCount="8">
                 <Column editable="false" title="Persona" type="java.lang.Object"/>
                 <Column editable="true" title="N&#xfa;mero de Tel&#xe9;fono" type="java.lang.Object"/>
-                <Column editable="false" title="Precio" type="java.lang.Object"/>
+                <Column editable="false" title="Precio Total" type="java.lang.Object"/>
                 <Column editable="true" title="Direcci&#xf3;n" type="java.lang.Object"/>
                 <Column editable="true" title="Cantidad De Productos" type="java.lang.Object"/>
-                <Column editable="true" title="Productos" type="java.lang.Object"/>
+                <Column editable="true" title="Tipo de Pedido" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

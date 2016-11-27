@@ -74,6 +74,7 @@ public class FrameClientes extends JFrame {
         ParametroFiltro = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         SpinnerColumna = new javax.swing.JSpinner();
+        CheckBoxRecoger = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
@@ -206,6 +207,8 @@ public class FrameClientes extends JFrame {
             }
         });
 
+        CheckBoxRecoger.setText("Pedido A Recoger");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,11 +228,12 @@ public class FrameClientes extends JFrame {
                             .addComponent(textFieldTelefono)
                             .addComponent(textFieldDireccion)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(OffLine, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(Error, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CheckBoxRecoger, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkBoxExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(hacerPedido))
@@ -288,7 +292,8 @@ public class FrameClientes extends JFrame {
                     .addComponent(hacerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkBoxExpress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OffLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(OffLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CheckBoxRecoger))
                 .addContainerGap())
         );
 
@@ -297,7 +302,11 @@ public class FrameClientes extends JFrame {
 
     private void hacerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hacerPedidoActionPerformed
         // TODO add your handling code here
-        this.llenarTabla();
+        this.ParametroFiltro.setText("");
+        TableRowSorter filtro = new TableRowSorter(this.jTableProductos.getModel());
+        jTableProductos.setRowSorter(filtro);
+        filtro.setRowFilter(RowFilter.regexFilter("", (int)this.SpinnerColumna.getValue()));
+        jTableProductos.repaint();
         this.Error.setVisible(!this.enviarPedido());
         this.CambiarHuesped.setVisible(this.Error.isVisible());
         this.Cleaner.doClick();
@@ -390,6 +399,7 @@ public class FrameClientes extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CambiarHuesped;
+    private javax.swing.JCheckBox CheckBoxRecoger;
     private javax.swing.JButton Cleaner;
     private javax.swing.JLabel Error;
     private javax.swing.JLabel LabelCalorias;
@@ -462,7 +472,7 @@ public class FrameClientes extends JFrame {
             if(this.checkBoxExpress.isSelected()){
                 return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(), textFieldDireccion.getText(),transporteActual));
             }
-            return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(),transporteActual));
+            return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(),transporteActual,this.CheckBoxRecoger.isSelected()));
         }
         return false;
     }

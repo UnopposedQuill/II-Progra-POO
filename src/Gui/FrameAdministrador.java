@@ -1,6 +1,8 @@
 package Gui;
 
 import java.util.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import segunda.progra.*;
 
 /*
@@ -104,7 +106,7 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Persona", "Número de Teléfono", "Precio", "Dirección", "Cantidad De Productos", "Productos"
+                "Persona", "Número de Teléfono", "Precio Total", "Dirección", "Cantidad De Productos", "Tipo de Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -324,6 +326,21 @@ public class FrameAdministrador extends javax.swing.JFrame {
 
     private void observarRelacionPorcentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarRelacionPorcentualActionPerformed
         // TODO add your handling code here:
+        Object [][] datos = new Object[1][3];
+        int[]porcentajes = this.porcentaje(this.cantidadPedidosARecoger(), this.cantidadTotalPedidosEnSitio(), this.cantidadTotalPedidosExpress());
+        
+        datos[0][0] = porcentajes[0];
+        datos[0][1] = porcentajes[1];
+        datos[0][2] = porcentajes[2];
+        
+        String[] columnas = {"Pedidos A Recoger", "Pedidos En Sitio", "Pedidos Express"};
+        DefaultTableModel modeloTablaPorcentajes = new DefaultTableModel(datos, columnas);
+        JTable tabla = new JTable(modeloTablaPorcentajes);
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        JFrame frame = new JFrame("Tabla Con La Relación Porcentual de Pedidos");
+        frame.setBounds(0, 0, 450, 250);
+        frame.getContentPane().add(scrollPane);
+        frame.setVisible(true);
     }//GEN-LAST:event_observarRelacionPorcentualActionPerformed
 
     private void PorcentajeExpressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PorcentajeExpressActionPerformed
@@ -459,15 +476,30 @@ public class FrameAdministrador extends javax.swing.JFrame {
      * Este método va revisando todos los pedidos buscando cuáles no son express
      * @return Un entero con la cantidad de pedidos que no son express
      */
-    private int cantidadTotalPedidos(){
+    private int cantidadTotalPedidosEnSitio(){
         int cantidadPedidos = 0;
         for (int i = 0; i < this.administrador.getServidor().getPedidos().size(); i++) {
             Pedido get = this.administrador.getServidor().getPedidos().get(i);
-            if(!get.isExpress()){
+            if(!get.isARecoger() && !get.isExpress()){
                 cantidadPedidos++;
             }
         }
         return cantidadPedidos;
+    }
+    
+    private int cantidadPedidosARecoger(){
+        int cantidadPedidos = 0;
+        for (int i = 0; i < this.administrador.getServidor().getPedidos().size(); i++) {
+            Pedido get = this.administrador.getServidor().getPedidos().get(i);
+            if(get.isARecoger()){
+                cantidadPedidos++;
+            }
+        }
+        return cantidadPedidos;
+    }
+    
+    public int cantidadTotalPedidos(){
+        return this.cantidadPedidosARecoger() + this.cantidadTotalPedidosEnSitio() + this.cantidadTotalPedidosExpress();
     }
     
     /**
@@ -520,5 +552,35 @@ public class FrameAdministrador extends javax.swing.JFrame {
             this.agregarNuevoProducto.setVisible(false);
             this.observarTodosProductos.setVisible(false);
         }
+    }
+    
+    /**
+     * Este método saca el porcentaje que representan del valor del valorTotal 3 valores específicos
+     * @param valor1 El valor pequeño, que se supone representa sólo una parte del valor total, el todo
+     * @param valor2 Otro valor, que se supone también representa una parte del valor total, el todo
+     * @param valor3 Otro valor, que se supone también representa una parte del valor total, el todo
+     * @return Un arreglo de números naturales N* que representan cuánto vale cada uno de los valores como porcentaje, -1 si algo inválido entró como parámetro
+     * Si el valor es mayor al valor total o si el valor o el valorTotal es menor o igual a 0
+     */
+    private int[] porcentaje(int valor1,int valor2,int valor3){
+        int [] porcentajes = {-1,-1,-1};
+        if(!(valor3 < 0 || valor2 < 0 || valor1 < 0)){
+            int valorTotal = valor1 + valor2 + valor3;
+            if(valorTotal == 0){
+                for (int i = 0; i < 3; i++) {porcentajes[i] = 0;}
+            }
+            else{
+                double resultado = valor1*100/valorTotal;
+                System.out.println(resultado);
+                porcentajes[0] = (int)resultado;
+                resultado = valor2*100/valorTotal;
+                System.out.println(resultado);
+                porcentajes[1] = (int)resultado;
+                porcentajes[2] = 100-(porcentajes[0]+porcentajes[1]);
+                for (int i = 0; i < porcentajes.length; i++) {
+                }
+            }
+        }
+        return porcentajes;
     }
 }

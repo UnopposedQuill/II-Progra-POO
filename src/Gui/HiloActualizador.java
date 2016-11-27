@@ -61,7 +61,7 @@ public class HiloActualizador extends Thread{
                     System.out.println("Tabla de Conexiones");
                     //Es un arrayList de Pedidos
                     //Defino las columnas
-                    String [] columnas = {"Persona", "Número de Teléfono", "Precio Total", "Dirección", "Cantidad De Productos", "Productos"};
+                    String [] columnas = {"Persona", "Número de Teléfono", "Precio Total", "Dirección", "Cantidad De Productos", "Tipo de Pedido"};
                     //Defino el nuevo arreglo de datos
                     Object [][] datos = new Object[this.arrayListLectura.size()][6];
                     for (int i = 0; i < this.arrayListLectura.size(); i++) {
@@ -74,7 +74,19 @@ public class HiloActualizador extends Thread{
                         else
                             datos[i][3] = "Nula";
                         datos[i][4] = Pedido.cantidadTotal(getPedido.getCantidadProductos());
-                        datos[i][5] = toStringArrayList(getPedido.getProductosPedidos());
+                        if(getPedido.isExpress()){
+                            datos[i][5] = "Express";
+                        }
+                        else{
+                            if(getPedido.isaRecoger()){
+                                datos[i][5] = "A Recoger";
+                            }
+                            else{
+                                datos[i][5] = "En sitio";
+                            }
+                        }
+                        
+                        
                         
                         int precio = 0;
                         //recorro todos los productos que se hayan pedido

@@ -22,6 +22,7 @@ public class Pedido implements Serializable{
     private String direccion;
     private int extraActualTransporte;
     private int ID;
+    private boolean aRecoger;
 
     /**
      * Este es el constructor para los pedidos express, este recibe todos los parámetros completos
@@ -41,17 +42,19 @@ public class Pedido implements Serializable{
         this.direccion = direccion;
         this.ID = -1;
         this.extraActualTransporte = extraActualTransporte;
+        this.aRecoger = false;
     }
 
     /**
-     * Este es el constructor para los pedidos normales, este recibe todos los parámetros menos la dirección
+     * Este es el constructor para los pedidos que no son express, este recibe todos los parámetros menos la dirección
      * @param productosPedidos Un ArrayList con los productos que se desean
      * @param cantidadesProductos Un arreglo de enteros con la cantidad de productos que se desean
      * @param nombre El nombre de la persona responsable por el pedido
      * @param numTelefono El número de teléfono de la persona responsable por el pedido
      * @param extraActualTransporte Este va a ser el porcentaje del momento por transporte
+     * @param aRecoger Si el pedido es para ir a recoger o no
      */
-    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono,int extraActualTransporte) {
+    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono,int extraActualTransporte,boolean aRecoger) {
         this.fechaPedido = Calendar.getInstance();
         this.productosPedidos = productosPedidos;
         this.cantidadesProductos = cantidadesProductos;
@@ -60,6 +63,7 @@ public class Pedido implements Serializable{
         this.direccion = null;
         this.ID = -1;
         this.extraActualTransporte = extraActualTransporte;
+        this.aRecoger = aRecoger;
     }
 
     /**
@@ -78,6 +82,18 @@ public class Pedido implements Serializable{
         this.ID = -1;
     }
 
+    /**
+     * Averigua si el pedido es a recoger
+     * @return True si el pedido es a recoger, False en el otro caso
+     */
+    public boolean isARecoger(){
+        return !this.isExpress() && this.aRecoger;
+    }
+    
+    public boolean isaRecoger() {
+        return aRecoger;
+    }
+    
     public int getExtraActualTransporte() {
         return extraActualTransporte;
     }

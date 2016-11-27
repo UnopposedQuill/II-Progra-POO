@@ -42,11 +42,12 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="OffLine" min="-2" pref="255" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="Error" min="-2" pref="303" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="CheckBoxRecoger" min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkBoxExpress" min="-2" pref="136" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="hacerPedido" min="-2" max="-2" attributes="0"/>
@@ -119,6 +120,7 @@
                   <Component id="checkBoxExpress" alignment="3" max="32767" attributes="0"/>
                   <Component id="Error" max="32767" attributes="0"/>
                   <Component id="OffLine" max="32767" attributes="0"/>
+                  <Component id="CheckBoxRecoger" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -333,6 +335,11 @@
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SpinnerColumnaStateChanged"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="CheckBoxRecoger">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pedido A Recoger"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
