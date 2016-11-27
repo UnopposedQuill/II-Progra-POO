@@ -84,6 +84,10 @@ public class HiloActualizador extends Thread{
                             //multiplicada por el precio individual
                             precio += getPedido.getCantidadProductos()[j]*getProductoPedido.getPrecio();
                         }
+                        if(getPedido.getDireccion() != null){
+                            double transporteMomentoPedido = (double)getPedido.getExtraActualTransporte();
+                            precio += precio*(transporteMomentoPedido/100);
+                        }
                         datos[i][2] = precio;
                     }
                     //actualizo el modelo

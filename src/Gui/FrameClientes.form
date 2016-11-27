@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" alignment="1" pref="1341" max="32767" attributes="0"/>
@@ -41,11 +41,6 @@
                           <Component id="textFieldDireccion" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="614" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="285" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="OffLine" min="-2" pref="255" max="-2" attributes="0"/>
@@ -61,6 +56,21 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Cleaner" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="285" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="CambiarHuesped" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="LabelFiltro" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ParametroFiltro" min="-2" pref="147" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="SpinnerColumna" min="-2" pref="131" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -68,9 +78,12 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel1" pref="42" max="32767" attributes="0"/>
+                  <Component id="CambiarHuesped" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="340" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -78,7 +91,14 @@
                   <Component id="LabelCalorias" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="Cleaner" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="SpinnerColumna" pref="33" max="32767" attributes="0"/>
+                  <Component id="LabelFiltro" max="32767" attributes="0"/>
+                  <Component id="ParametroFiltro" max="32767" attributes="0"/>
+                  <Component id="jLabel5" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="textFieldPersona" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="33" max="-2" attributes="0"/>
@@ -93,7 +113,7 @@
                   <Component id="jLabel4" max="32767" attributes="0"/>
                   <Component id="textFieldDireccion" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="hacerPedido" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="checkBoxExpress" alignment="3" max="32767" attributes="0"/>
@@ -278,6 +298,37 @@
     <Component class="javax.swing.JLabel" name="LabelCalorias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Su pedido contiene: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="CambiarHuesped">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cambiar Huesped"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CambiarHuespedActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelFiltro">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Buscar: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ParametroFiltro">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ParametroFiltroKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="de la columna: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="SpinnerColumna">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="2" maximum="4" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

@@ -28,8 +28,8 @@ public class Cliente {
         this.puerto = 5000;
     }
     
-    public Cliente(int port, String host){
-        this.puerto = port;
+    public Cliente(String host){
+        this.puerto = 5000;
         this.huesped = host;
     }
     

@@ -20,6 +20,7 @@ import javax.swing.table.*;
 public class FrameClientes extends JFrame {
 
     private ArrayList <Producto> productos;
+    private String huesped = "localhost";
     /**
      * Creates new form Clientes
      */
@@ -28,9 +29,13 @@ public class FrameClientes extends JFrame {
         this.LabelCalorias.setVisible(false);
         boolean offline = !this.conseguirProductos();
         this.OffLine.setVisible(offline);
+        this.CambiarHuesped.setVisible(offline);
         if(!offline){
             this.llenarTabla();
             this.jTableProductos.setRowHeight(25);
+            TableModel modeloTabla = this.jTableProductos.getModel();
+            TableRowSorter <TableModel> ordenador = new TableRowSorter<>(modeloTabla);
+            this.jTableProductos.setRowSorter(ordenador);
         }
     }
 
@@ -58,6 +63,11 @@ public class FrameClientes extends JFrame {
         OffLine = new javax.swing.JLabel();
         Cleaner = new javax.swing.JButton();
         LabelCalorias = new javax.swing.JLabel();
+        CambiarHuesped = new javax.swing.JButton();
+        LabelFiltro = new javax.swing.JLabel();
+        ParametroFiltro = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        SpinnerColumna = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
@@ -165,6 +175,26 @@ public class FrameClientes extends JFrame {
 
         LabelCalorias.setText("Su pedido contiene: ");
 
+        CambiarHuesped.setText("Cambiar Huesped");
+        CambiarHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambiarHuespedActionPerformed(evt);
+            }
+        });
+
+        LabelFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabelFiltro.setText("Buscar: ");
+
+        ParametroFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ParametroFiltroKeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("de la columna: ");
+
+        SpinnerColumna.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,10 +213,6 @@ public class FrameClientes extends JFrame {
                             .addComponent(textFieldPersona, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
                             .addComponent(textFieldTelefono)
                             .addComponent(textFieldDireccion)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(614, 614, 614)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(OffLine, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,21 +225,42 @@ public class FrameClientes extends JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(LabelCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Cleaner)))
+                        .addComponent(Cleaner))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CambiarHuesped))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ParametroFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SpinnerColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(CambiarHuesped, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cleaner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SpinnerColumna, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(LabelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ParametroFiltro)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textFieldPersona)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,7 +272,7 @@ public class FrameClientes extends JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hacerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkBoxExpress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,8 +285,10 @@ public class FrameClientes extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hacerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hacerPedidoActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        this.llenarTabla();
         this.Error.setVisible(!this.enviarPedido());
+        this.CambiarHuesped.setVisible(this.Error.isVisible());
         this.Cleaner.doClick();
     }//GEN-LAST:event_hacerPedidoActionPerformed
 
@@ -265,15 +314,31 @@ public class FrameClientes extends JFrame {
 
     private void jTableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductosMouseClicked
         // TODO add your handling code here:
-        this.actualizarCaloriasPrecioPantalla(0);
+        this.actualizarCaloriasPrecioPantalla();
     }//GEN-LAST:event_jTableProductosMouseClicked
 
     private void jTableProductosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableProductosPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableProductosPropertyChange
 
+    private void CambiarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarHuespedActionPerformed
+        // TODO add your handling code here:
+        this.huesped = (String) JOptionPane.showInputDialog("Inserte el nuevo huésped");
+    }//GEN-LAST:event_CambiarHuespedActionPerformed
+
+    private void ParametroFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParametroFiltroKeyTyped
+        // TODO add your handling code here:
+        System.out.println(evt.getKeyChar());
+        TableModel modeloTabla = this.jTableProductos.getModel();
+        TableRowSorter <TableModel> ordenador = new TableRowSorter<>(modeloTabla);
+        ordenador.setRowFilter(RowFilter.regexFilter(this.ParametroFiltro.getText(), (int)this.SpinnerColumna.getValue()));
+        
+        jTableProductos.setModel(modeloTabla);
+    }//GEN-LAST:event_ParametroFiltroKeyTyped
+
     /**
      * @param args the command line arguments
+     *
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -310,16 +375,21 @@ public class FrameClientes extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CambiarHuesped;
     private javax.swing.JButton Cleaner;
     private javax.swing.JLabel Error;
     private javax.swing.JLabel LabelCalorias;
+    private javax.swing.JLabel LabelFiltro;
     private javax.swing.JLabel OffLine;
+    private javax.swing.JTextField ParametroFiltro;
+    private javax.swing.JSpinner SpinnerColumna;
     private javax.swing.JCheckBox checkBoxExpress;
     private javax.swing.JButton hacerPedido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProductos;
     private javax.swing.JTextField textFieldDireccion;
@@ -327,33 +397,36 @@ public class FrameClientes extends JFrame {
     private javax.swing.JTextField textFieldTelefono;
     // End of variables declaration//GEN-END:variables
     
-    private void actualizarCaloriasPrecioPantalla(int costeTransporte){
-        this.LabelCalorias.setVisible(true);
-        int cantidadCalorias = 0;
-        int precio = 0;
-        TableModel modeloTabla = this.jTableProductos.getModel();
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-            JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
-            if(checkBoxSeleccionado.isSelected()){
-                JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
-                precio += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 9);
-                cantidadCalorias += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 7);
+    private void actualizarCaloriasPrecioPantalla(){
+        try{
+            this.LabelCalorias.setVisible(true);
+            int cantidadCalorias = 0;
+            int precio = 0;
+            TableModel modeloTabla = this.jTableProductos.getModel();
+            for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+                JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
+                if(checkBoxSeleccionado.isSelected()){
+                    JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
+                    precio += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 9);
+                    cantidadCalorias += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 7);
+                }
             }
+            if(this.checkBoxExpress.isSelected()){
+                Cliente cliente = new Cliente(this.huesped);
+                double transporteActual = (double)cliente.conseguirTransporte();
+                precio += precio*(transporteActual/100);
+            }
+            this.LabelCalorias.setText("Su pedido contiene: " + cantidadCalorias + " calorías, con un coste preliminar de: " + precio + " colones");
+        }catch(NullPointerException exc){
+            System.out.println("Sin productos");
         }
-        if(this.checkBoxExpress.isSelected()){
-            Cliente cliente = new Cliente();
-            double transporteActual = (double)cliente.conseguirTransporte();
-            System.out.println(transporteActual);
-            precio += precio*(transporteActual/100);
-        }
-        this.LabelCalorias.setText("Su pedido contiene: " + cantidadCalorias + " calorías, con un coste preliminar de: " + precio + " colones");
     }
     
     /**
      * Este es un método tipo hilo para asegurarse de que los productos siempre sean los más actualizados
      */
     private boolean conseguirProductos(){
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente(this.huesped);
         this.productos = cliente.conseguirListaDeProductos();
         return this.productos != null;
     }
@@ -370,7 +443,7 @@ public class FrameClientes extends JFrame {
             if(this.checkBoxExpress.isSelected() && this.textFieldDireccion.getText().equals("")){
                 return false;
             }
-            Cliente cliente = new Cliente();
+            Cliente cliente = new Cliente(this.huesped);
             int transporteActual = cliente.conseguirTransporte();
             if(this.checkBoxExpress.isSelected()){
                 return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(), textFieldDireccion.getText(),transporteActual));
@@ -409,23 +482,22 @@ public class FrameClientes extends JFrame {
             
             //con esto defino los tipos por fuerza que va a tener el modelo
             Class[] tipos = new Class[]{
-            //los primeros 2 son un check box y un JSpinner, son los que importan, el resto son de sólo lectura
-            //y no tienen peso en la progra
-            JCheckBox.class,
-            JSpinner.class,
-            
-            Object.class,
-            Object.class,            
-            Object.class,
-            Object.class,            
-            Object.class,
-            Object.class,            
-            Object.class,
-            Object.class,
-            Object.class,
-            Object.class,
-            Object.class,
-            Object.class};
+            //los primeros 2 son un check box y un JSpinner, son los que más importan, los integers son sólo para el ordenamiento, los strings son para
+            //el filtrado
+                JCheckBox.class,
+                JSpinner.class,
+                
+                String.class,
+                String.class,
+                String.class,
+                
+                Integer.class,
+                Integer.class,
+                Integer.class,
+                Integer.class,
+                Integer.class,
+
+                String.class};
             
             //este override es para modificar lo que consigue al intentar la tabla
             @Override
@@ -448,7 +520,7 @@ public class FrameClientes extends JFrame {
              * retornar lo que entra xD
              * El asunto es que a la hora de pintar la tabla dibuje el objeto tal
              * y como entra, en lugar de hacerlo asquerosamente de manera default 
-             * Resumen: hace que aparezca un botón cuando aparece un botón
+             * Resumen: hace que aparezca un JSpinner cuando aparece un JSpinner dentro de los datos
              */
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {
@@ -462,7 +534,7 @@ public class FrameClientes extends JFrame {
              * retornar lo que entra xD
              * El asunto es que a la hora de pintar la tabla dibuje el objeto tal
              * y como entra, en lugar de hacerlo asquerosamente de manera default 
-             * Resumen: hace que aparezca un botón cuando aparece un botón
+             * Resumen: hace que aparezca un JCheckBox cuando aparece un JCheckBox dentro de los datos
              */
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object objeto, boolean estaSeleccionado, boolean tieneElFoco, int fila, int columna) {

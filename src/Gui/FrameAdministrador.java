@@ -1,5 +1,6 @@
 package Gui;
 
+import javax.swing.JOptionPane;
 import segunda.progra.Servidor;
 
 /*
@@ -11,7 +12,7 @@ import segunda.progra.Servidor;
 import segunda.progra.*;
 
 /**
- *
+ * Esta será la ventana controlada por el administrador del servidor
  * @author Esteban
  */
 public class FrameAdministrador extends javax.swing.JFrame {
@@ -67,7 +68,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
         observarPeoresProductos = new javax.swing.JButton();
         observarRelacionPorcentual = new javax.swing.JButton();
         agregarNuevoProducto = new javax.swing.JButton();
-        modificarProducto = new javax.swing.JButton();
         observarTodosProductos = new javax.swing.JButton();
         PorcentajeExpress = new javax.swing.JTextField();
         LabelEmpaque = new javax.swing.JLabel();
@@ -160,13 +160,26 @@ public class FrameAdministrador extends javax.swing.JFrame {
         });
 
         agregarNuevoProducto.setText("Agregar Nuevo Producto");
-
-        modificarProducto.setText("Modificar un Producto");
+        agregarNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarNuevoProductoActionPerformed(evt);
+            }
+        });
 
         observarTodosProductos.setText("Observar Todos Los Productos");
+        observarTodosProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                observarTodosProductosActionPerformed(evt);
+            }
+        });
 
         PorcentajeExpress.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PorcentajeExpress.setText("15");
+        PorcentajeExpress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                PorcentajeExpressFocusLost(evt);
+            }
+        });
         PorcentajeExpress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PorcentajeExpressActionPerformed(evt);
@@ -222,19 +235,18 @@ public class FrameAdministrador extends javax.swing.JFrame {
                             .addComponent(observarPeoresProductos, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(agregarNuevoProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(96, 96, 96)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(modificarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(observarRelacionPorcentual)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LabelEmpaque, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PorcentajeExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PorcentajeExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -262,10 +274,8 @@ public class FrameAdministrador extends javax.swing.JFrame {
                     .addComponent(observarMejoresProductos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(modificarProducto)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(agregarNuevoProducto)
-                        .addComponent(observarTodosProductos)))
+                    .addComponent(agregarNuevoProducto)
+                    .addComponent(observarTodosProductos))
                 .addContainerGap())
         );
 
@@ -322,6 +332,22 @@ public class FrameAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PorcentajeExpressActionPerformed
 
+    private void PorcentajeExpressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PorcentajeExpressFocusLost
+        // TODO add your handling code here:
+        this.administrador.getServidor().setAumentoEmpaque(Integer.parseInt(this.PorcentajeExpress.getText()));
+    }//GEN-LAST:event_PorcentajeExpressFocusLost
+
+    private void agregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNuevoProductoActionPerformed
+        // TODO add your handling code here:
+        AgenteProductos modificadorBaseDatos = new AgenteProductos(this.administrador.getServidor());
+    }//GEN-LAST:event_agregarNuevoProductoActionPerformed
+
+    private void observarTodosProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarTodosProductosActionPerformed
+        // TODO add your handling code here:
+        TodosLosProductos tablaTodosProductos = new TodosLosProductos(this.administrador.getServidor().getProductos(), this.administrador.getServidor());
+        tablaTodosProductos.setVisible(true);
+    }//GEN-LAST:event_observarTodosProductosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -376,7 +402,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton agregarNuevoProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton modificarProducto;
     private javax.swing.JButton observarMejoresProductos;
     private javax.swing.JButton observarPeoresProductos;
     private javax.swing.JButton observarRelacionPorcentual;
@@ -409,7 +434,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
             this.observarPeoresProductos.setVisible(true);
             this.observarRelacionPorcentual.setVisible(true);
             this.agregarNuevoProducto.setVisible(true);
-            this.modificarProducto.setVisible(true);
             this.observarTodosProductos.setVisible(true);
         }
         else{
@@ -432,7 +456,6 @@ public class FrameAdministrador extends javax.swing.JFrame {
             this.observarPeoresProductos.setVisible(false);
             this.observarRelacionPorcentual.setVisible(false);
             this.agregarNuevoProducto.setVisible(false);
-            this.modificarProducto.setVisible(false);
             this.observarTodosProductos.setVisible(false);
         }
     }

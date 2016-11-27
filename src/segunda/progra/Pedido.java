@@ -7,6 +7,7 @@ package segunda.progra;
 
 import java.util.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -77,6 +78,10 @@ public class Pedido implements Serializable{
         this.ID = -1;
     }
 
+    public int getExtraActualTransporte() {
+        return extraActualTransporte;
+    }
+    
     public Calendar getFechaPedido() {
         return fechaPedido;
     }
@@ -140,7 +145,8 @@ public class Pedido implements Serializable{
 
     @Override
     public String toString(){
-        return "Pedido el: " + fechaPedido + ", productos pedidos: " + productosPedidos + ", cantidad de productos pedidos: " + cantidadTotal(cantidadesProductos) + ", nombre: " + nombre + ", número de teléfono: " + numTelefono + ", dirección: " + direccion + ", identificador del pedido: " + ID;
+        SimpleDateFormat formateador = new SimpleDateFormat("DD-MM-yyyy");
+        return "Pedido el: " + formateador.format(fechaPedido.getTime()) + ", productos pedidos: " + productosPedidos + ", cantidad de productos pedidos: " + cantidadTotal(cantidadesProductos) + ", nombre: " + nombre + ", número de teléfono: " + numTelefono + ", dirección: " + direccion + ", identificador del pedido: " + ID;
     }
     
     /**

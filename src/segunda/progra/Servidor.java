@@ -200,6 +200,25 @@ public class Servidor extends Thread{
     }
     
     /**
+     * Este método busca un producto para cambiarlo por uno nuevo(cofcofModificarlocofcof)
+     * @param productoModificado El nuevo producto que va a tomar el lugar de uno con el mismo código dentro de la lista
+     * @return True si estaba "Y" fue cambiado exitosamente, False si: no estaba, no pudo ser removido, no pudo ser agredado, no pudo ser actualizado en el XML
+     */
+    public boolean modificarProducto(Producto productoModificado){
+        if(!this.productos.contains(productoModificado)){
+            return false;
+        }
+        boolean resultado = this.productos.remove(productoModificado);
+        if(resultado){
+            resultado = this.productos.add(productoModificado);
+            if(resultado){
+                guardarProductos();
+            }
+        }
+        return resultado;
+    }
+    
+    /**
      * Este método revisa todos los pedidos y averigua el pedido con el ID más alto
      * @return Un entero con el ID más alto, -1 es el valor para "no hay pedidos"
      */
