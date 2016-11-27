@@ -334,8 +334,11 @@ public class FrameClientes extends JFrame {
     }//GEN-LAST:event_CambiarHuespedActionPerformed
 
     private void ParametroFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParametroFiltroKeyTyped
-        // TODO add your handling code here: 
-        jTableProductos.setRowSorter(RowFilter.regexFilter(this.ParametroFiltro.getText(), (int)this.SpinnerColumna.getValue()));
+        // TODO add your handling code here:
+        TableRowSorter filtro = new TableRowSorter(this.jTableProductos.getModel());
+        jTableProductos.setRowSorter(filtro);
+        filtro.setRowFilter(RowFilter.regexFilter(this.ParametroFiltro.getText().concat(String.valueOf(evt.getKeyChar())).trim(), (int)this.SpinnerColumna.getValue()));
+        jTableProductos.repaint();
     }//GEN-LAST:event_ParametroFiltroKeyTyped
 
     /**
