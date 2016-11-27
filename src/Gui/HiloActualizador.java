@@ -99,6 +99,11 @@ public class HiloActualizador extends Thread{
         }
     }
     
+    /**
+     * Este es un método para imprimir con formato maś bonito un arrayList
+     * @param arrayL El arrayList a ser imprimido con mejor formato
+     * @return Un string con un formato más razonable
+     */
     public static String toStringArrayList(ArrayList arrayL){
         String stringResultante = "";
         

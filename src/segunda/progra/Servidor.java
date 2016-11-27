@@ -8,8 +8,6 @@ package segunda.progra;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 import org.jdom2.*;
@@ -325,6 +323,17 @@ public class Servidor extends Thread{
                 } catch (IOException ex) {
                     System.out.println("Hubo un error a la hora de enviar la respuesta");
             }
+                break;
+            }
+            case conseguirTransporte:{//se desea conseguir el extra por transporte
+                try{
+                    System.out.println("Era una petición del extra por transporte");
+                    mensajeAAtender.setDatoDeRespuesta(this.aumentoEmpaque);
+                    this.flujoDeSalida.writeObject(mensajeAAtender);
+                    System.out.println("Mensaje Retornado con Éxito");
+                }catch(IOException excep){
+                    System.out.println("Hubo un error a la hora de enviar la respuesta");
+                }
                 break;
             }
             default:{

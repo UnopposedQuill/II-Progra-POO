@@ -265,19 +265,7 @@ public class FrameClientes extends JFrame {
 
     private void jTableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProductosMouseClicked
         // TODO add your handling code here:
-        this.LabelCalorias.setVisible(true);
-        int cantidadCalorias = 0;
-        int precio = 0;
-        TableModel modeloTabla = this.jTableProductos.getModel();
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-            JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
-            if(checkBoxSeleccionado.isSelected()){
-                JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
-                precio += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 9);
-                cantidadCalorias += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 7);
-            }
-        }
-        this.LabelCalorias.setText("Su pedido contiene: " + cantidadCalorias + " calorías, con un coste de: " + precio + " colones");
+        this.actualizarCaloriasPrecioPantalla(0);
     }//GEN-LAST:event_jTableProductosMouseClicked
 
     private void jTableProductosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableProductosPropertyChange
@@ -339,6 +327,28 @@ public class FrameClientes extends JFrame {
     private javax.swing.JTextField textFieldTelefono;
     // End of variables declaration//GEN-END:variables
     
+    private void actualizarCaloriasPrecioPantalla(int costeTransporte){
+        this.LabelCalorias.setVisible(true);
+        int cantidadCalorias = 0;
+        int precio = 0;
+        TableModel modeloTabla = this.jTableProductos.getModel();
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            JCheckBox checkBoxSeleccionado = (JCheckBox)modeloTabla.getValueAt(i, 0);
+            if(checkBoxSeleccionado.isSelected()){
+                JSpinner spinnerCantidad = (JSpinner) modeloTabla.getValueAt(i, 1);
+                precio += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 9);
+                cantidadCalorias += ((int)(spinnerCantidad.getModel().getValue())) * (int)modeloTabla.getValueAt(i, 7);
+            }
+        }
+        if(this.checkBoxExpress.isSelected()){
+            Cliente cliente = new Cliente();
+            double transporteActual = (double)cliente.conseguirTransporte();
+            System.out.println(transporteActual);
+            precio += precio*(transporteActual/100);
+        }
+        this.LabelCalorias.setText("Su pedido contiene: " + cantidadCalorias + " calorías, con un coste preliminar de: " + precio + " colones");
+    }
+    
     /**
      * Este es un método tipo hilo para asegurarse de que los productos siempre sean los más actualizados
      */
@@ -361,10 +371,11 @@ public class FrameClientes extends JFrame {
                 return false;
             }
             Cliente cliente = new Cliente();
+            int transporteActual = cliente.conseguirTransporte();
             if(this.checkBoxExpress.isSelected()){
-                return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(), textFieldDireccion.getText()));
+                return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(), textFieldDireccion.getText(),transporteActual));
             }
-            return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText()));
+            return cliente.hacerPedido(new Pedido(this.conseguirProductosSeleccionados(), this.conseguirCantidadProductosSeleccionados(), this.textFieldPersona.getText(), this.textFieldTelefono.getText(),transporteActual));
         }
         return false;
     }

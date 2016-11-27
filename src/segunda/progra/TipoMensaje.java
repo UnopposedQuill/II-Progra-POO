@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Esteban
  */
 public enum TipoMensaje implements Serializable{
-    conseguirLista,nuevoPedido;
+    conseguirLista,nuevoPedido,conseguirTransporte;
     
     public String getRepString(){
         switch(this){
@@ -21,6 +21,9 @@ public enum TipoMensaje implements Serializable{
             }
             case nuevoPedido:{
                 return "Nuevo Pedido";
+            }
+            case conseguirTransporte:{
+                return "Conseguir Porcentaje Transporte";
             }
             default:{
                 return "NULL";

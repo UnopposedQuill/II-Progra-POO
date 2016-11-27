@@ -19,6 +19,7 @@ public class Pedido implements Serializable{
     private String nombre;
     private String numTelefono;
     private String direccion;
+    private int extraActualTransporte;
     private int ID;
 
     /**
@@ -28,8 +29,9 @@ public class Pedido implements Serializable{
      * @param nombre El nombre de la persona responsable por el pedido
      * @param numTelefono El número de teléfono de la persona responsable por el pedido
      * @param direccion La dirección de la persona responsable por el pedido
+     * @param extraActualTransporte Este va a ser el porcentaje del momento por transporte
      */
-    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono, String direccion) {
+    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono, String direccion,int extraActualTransporte) {
         this.fechaPedido = Calendar.getInstance();
         this.productosPedidos = productosPedidos;
         this.cantidadesProductos = cantidadesProductos;
@@ -37,6 +39,7 @@ public class Pedido implements Serializable{
         this.numTelefono = numTelefono;
         this.direccion = direccion;
         this.ID = -1;
+        this.extraActualTransporte = extraActualTransporte;
     }
 
     /**
@@ -45,8 +48,9 @@ public class Pedido implements Serializable{
      * @param cantidadesProductos Un arreglo de enteros con la cantidad de productos que se desean
      * @param nombre El nombre de la persona responsable por el pedido
      * @param numTelefono El número de teléfono de la persona responsable por el pedido
+     * @param extraActualTransporte Este va a ser el porcentaje del momento por transporte
      */
-    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono) {
+    public Pedido(ArrayList<Producto> productosPedidos, int[] cantidadesProductos, String nombre, String numTelefono,int extraActualTransporte) {
         this.fechaPedido = Calendar.getInstance();
         this.productosPedidos = productosPedidos;
         this.cantidadesProductos = cantidadesProductos;
@@ -54,6 +58,7 @@ public class Pedido implements Serializable{
         this.numTelefono = numTelefono;
         this.direccion = null;
         this.ID = -1;
+        this.extraActualTransporte = extraActualTransporte;
     }
 
     /**

@@ -22,6 +22,7 @@ public class Cliente {
     private ObjectInputStream flujoDeEntrada;
     private int puerto = 5000;
     private String huesped = "localhost";
+    //private String huesped = "192.168.100.3"; ip -h -f inet address
     
     public Cliente(){
         this.puerto = 5000;
@@ -59,6 +60,10 @@ public class Cliente {
         return null;
     }
     
+    /**
+     * Este es el método para pedirle al cliente que consiga la lista de productos actual del servidor
+     * @return Un arrayList que contiene todos los productos actuales del servidor
+     */
     public ArrayList<Producto> conseguirListaDeProductos(){
         Mensaje mensajePeticion = this.realizarPeticion(new Mensaje(TipoMensaje.conseguirLista, null));
         if(mensajePeticion != null){
@@ -71,6 +76,11 @@ public class Cliente {
         return null;
     }
     
+    /**
+     * Este es el método para pedirle al cliente que envíe una solicitud de agregado de pedido al servidor
+     * @param pedidoASolicitar El pedido que se desea enviar
+     * @return True si fue atendida correctamente la petición, False en el otro caso
+     */
     public boolean hacerPedido(Pedido pedidoASolicitar){
         Mensaje mensajePeticion = this.realizarPeticion(new Mensaje(TipoMensaje.nuevoPedido, pedidoASolicitar));
         if(mensajePeticion != null){
@@ -81,5 +91,21 @@ public class Cliente {
             }
         }
         return false;
+    }
+    
+    /**
+     * Este es el método para pedirle al cliente que consiga el coste extra actual por el transporte del producto
+     * @return Un entero que representa el porcentaje extra por transporte
+     */
+    public int conseguirTransporte(){
+        Mensaje mensajePeticion = this.realizarPeticion(new Mensaje(TipoMensaje.conseguirTransporte, null));
+        if(mensajePeticion != null){
+            try{
+                return (int) mensajePeticion.getDatoDeRespuesta();
+            }catch(ClassCastException exc){
+                System.out.println("El servidor retornó algo raro");
+            }
+        }
+        return -1;
     }
 }
