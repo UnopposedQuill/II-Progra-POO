@@ -25,7 +25,7 @@ and open the template in the editor.
         <CaloriasPorPieza>750</CaloriasPorPieza>
         <Precio>900</Precio>
     </Helado>
-    <TeFrio>
+    <Te_Frio>
         <Codigo>BEB-001</Codigo>
         <Descripcion>Consiste en una forma helada de té, servida a menudo en un vaso con hielo.</Descripcion>
         <TamanhoPorcion>100</TamanhoPorcion>

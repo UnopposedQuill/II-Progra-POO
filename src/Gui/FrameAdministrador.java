@@ -149,8 +149,18 @@ public class FrameAdministrador extends javax.swing.JFrame {
         });
 
         observarMejoresProductos.setText("Observar Mejores Productos");
+        observarMejoresProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                observarMejoresProductosActionPerformed(evt);
+            }
+        });
 
         observarPeoresProductos.setText("Observar Peores Productos");
+        observarPeoresProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                observarPeoresProductosActionPerformed(evt);
+            }
+        });
 
         observarRelacionPorcentual.setText("Observar Relación Porcentual");
         observarRelacionPorcentual.addActionListener(new java.awt.event.ActionListener() {
@@ -355,13 +365,54 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private void agregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNuevoProductoActionPerformed
         // TODO add your handling code here:
         AgenteProductos modificadorBaseDatos = new AgenteProductos(this.administrador.getServidor());
+        modificadorBaseDatos.setVisible(true);
     }//GEN-LAST:event_agregarNuevoProductoActionPerformed
 
     private void observarTodosProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarTodosProductosActionPerformed
         // TODO add your handling code here:
+        //la clase todos los productos no necesariamente contiene todos los productos, pero en este caso sí le
+        //estoy pasando todos
         TodosLosProductos tablaTodosProductos = new TodosLosProductos(this.administrador.getServidor().getProductos(), this.administrador.getServidor());
         tablaTodosProductos.setVisible(true);
     }//GEN-LAST:event_observarTodosProductosActionPerformed
+
+    private void observarPeoresProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarPeoresProductosActionPerformed
+        // TODO add your handling code here:
+        ArrayList <Producto> peoresProductos = new ArrayList();
+        ArrayList <Producto> listaProductos = this.administrador.getServidor().getProductos();
+        int [] cantidadesProductos = this.conseguirCantidadesPedidos();
+        for (int i = 0; i < cantidadesProductos.length; i++) {
+            int cantidadesProducto = cantidadesProductos[i];
+            if(cantidadesProducto == 0){
+                peoresProductos.add(listaProductos.get(i));
+            }
+        }
+        //este es un caso en el que "todos los productos" no contiene todos los productos, en lugar de eso, sólo
+        //contiene una cantidad específica de elementos: los que no han sido pedidos
+        TodosLosProductos tablaTodosProductos = new TodosLosProductos(peoresProductos, this.administrador.getServidor());
+        tablaTodosProductos.setVisible(true);
+    }//GEN-LAST:event_observarPeoresProductosActionPerformed
+
+    private void observarMejoresProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarMejoresProductosActionPerformed
+        // TODO add your handling code here:
+        ArrayList <Producto> listaProductos = this.administrador.getServidor().getProductos();
+        ArrayList <IdentificadoresOrden> listaOrdenada = new ArrayList<>();
+        int [] cantidadesProductosPedidos = this.conseguirCantidadesPedidos();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            Producto get = listaProductos.get(i);
+            listaOrdenada.add(new IdentificadoresOrden(get.getCodigo(), cantidadesProductosPedidos[i]));
+        }
+        //El sorting
+        Collections.sort(listaOrdenada, (IdentificadoresOrden o1, IdentificadoresOrden o2) 
+                -> new Integer(o2.getCantidadPedido()).compareTo(o1.getCantidadPedido()));
+        ArrayList <Producto> mejoresProductos = new ArrayList<>();
+        for (int i = 0; i < listaOrdenada.size() && i < 10; i++) {
+            IdentificadoresOrden get = listaOrdenada.get(i);
+            mejoresProductos.add(listaProductos.get(listaProductos.indexOf(new Producto(get.getCodigo()))));
+        }
+        TodosLosProductos tablaTodosProductos = new TodosLosProductos(mejoresProductos, this.administrador.getServidor());
+        tablaTodosProductos.setVisible(true);
+    }//GEN-LAST:event_observarMejoresProductosActionPerformed
 
     /**
      * @param args the command line arguments

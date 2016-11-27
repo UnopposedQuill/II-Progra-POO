@@ -288,11 +288,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Observar Mejores Productos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="observarMejoresProductosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="observarPeoresProductos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Observar Peores Productos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="observarPeoresProductosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="observarRelacionPorcentual">
       <Properties>

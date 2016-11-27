@@ -70,6 +70,8 @@
                       <Component id="jLabel5" min="-2" pref="106" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="SpinnerColumna" min="-2" pref="131" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Correcto" min="-2" pref="450" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -94,10 +96,13 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="SpinnerColumna" pref="33" max="32767" attributes="0"/>
-                  <Component id="LabelFiltro" max="32767" attributes="0"/>
-                  <Component id="ParametroFiltro" max="32767" attributes="0"/>
-                  <Component id="jLabel5" max="32767" attributes="0"/>
+                  <Component id="Correcto" pref="33" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="SpinnerColumna" pref="33" max="32767" attributes="0"/>
+                      <Component id="LabelFiltro" max="32767" attributes="0"/>
+                      <Component id="ParametroFiltro" max="32767" attributes="0"/>
+                      <Component id="jLabel5" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -339,6 +344,15 @@
     <Component class="javax.swing.JCheckBox" name="CheckBoxRecoger">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pedido A Recoger"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Correcto">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Pedido Realizado Correctamente"/>
       </Properties>
     </Component>
   </SubComponents>
