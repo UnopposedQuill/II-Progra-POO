@@ -330,6 +330,9 @@
           <SpinnerModel initial="2" maximum="4" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="SpinnerColumnaStateChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

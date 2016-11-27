@@ -200,6 +200,11 @@ public class FrameClientes extends JFrame {
         jLabel5.setText("de la columna: ");
 
         SpinnerColumna.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
+        SpinnerColumna.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SpinnerColumnaStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -340,6 +345,14 @@ public class FrameClientes extends JFrame {
         filtro.setRowFilter(RowFilter.regexFilter(this.ParametroFiltro.getText().concat(String.valueOf(evt.getKeyChar())).trim(), (int)this.SpinnerColumna.getValue()));
         jTableProductos.repaint();
     }//GEN-LAST:event_ParametroFiltroKeyTyped
+
+    private void SpinnerColumnaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SpinnerColumnaStateChanged
+        // TODO add your handling code here:
+        TableRowSorter filtro = new TableRowSorter(this.jTableProductos.getModel());
+        jTableProductos.setRowSorter(filtro);
+        filtro.setRowFilter(RowFilter.regexFilter(this.ParametroFiltro.getText(), (int)this.SpinnerColumna.getValue()));
+        jTableProductos.repaint();
+    }//GEN-LAST:event_SpinnerColumnaStateChanged
 
     /**
      * @param args the command line arguments
