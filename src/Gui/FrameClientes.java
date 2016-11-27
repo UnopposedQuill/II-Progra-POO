@@ -334,17 +334,12 @@ public class FrameClientes extends JFrame {
     }//GEN-LAST:event_CambiarHuespedActionPerformed
 
     private void ParametroFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParametroFiltroKeyTyped
-        // TODO add your handling code here:
-        TableModel modeloTabla = this.jTableProductos.getModel();
-        TableRowSorter <TableModel> ordenador = new TableRowSorter<>(modeloTabla);
-        ordenador.setRowFilter(RowFilter.regexFilter(this.ParametroFiltro.getText(), (int)this.SpinnerColumna.getValue()));
-        
-        jTableProductos.setModel(modeloTabla);
+        // TODO add your handling code here: 
+        jTableProductos.setRowSorter(RowFilter.regexFilter(this.ParametroFiltro.getText(), (int)this.SpinnerColumna.getValue()));
     }//GEN-LAST:event_ParametroFiltroKeyTyped
 
     /**
      * @param args the command line arguments
-     *
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
