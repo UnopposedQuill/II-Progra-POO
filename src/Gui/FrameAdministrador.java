@@ -1,15 +1,13 @@
 package Gui;
 
-import javax.swing.JOptionPane;
-import segunda.progra.Servidor;
+import java.util.*;
+import segunda.progra.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import segunda.progra.*;
 
 /**
  * Esta será la ventana controlada por el administrador del servidor
@@ -408,6 +406,70 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton observarTodosProductos;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Este método consigue un arreglo de la cantidad de veces que se han pedido todos los productos, estarán ordenados igual que en el arrayList
+     * @return Un arreglo de enteros que contiene la cantidad de veces que se ha pedido cada producto
+     */
+    private int[] conseguirCantidadesPedidos(){
+        //creo un par de referencias a los dos arrayLists que debo ir leyendo, los pedidos me dicen las cantidades, los productos me guían en donde debo
+        //escribir la cantidad de productos
+        ArrayList <Pedido> pedidosALeer = this.administrador.getServidor().getPedidos();
+        ArrayList <Producto> referenciaProductos = this.administrador.getServidor().getProductos();
+        //creo un arreglo que contendrá el resultado, será del tamaño de la lista de productos
+        int[] cantidadProductos = new int[referenciaProductos.size()];
+        for (int i = 0; i < cantidadProductos.length; i++) {cantidadProductos[i] = 0;}//limpio el nuevo arreglo
+        
+        //ahora toca llenar el nuevo arreglo
+        for (int i = 0; i < pedidosALeer.size(); i++) {
+            Pedido getPedido = pedidosALeer.get(i);//tomo el pedido, que me dirá cuánto se pidió
+            for (int j = 0; j < getPedido.getProductosPedidos().size(); j++) {
+                Producto getProductosPedido = getPedido.getProductosPedidos().get(j);//para cada uno de los productos que se pidieron
+                //escriba en la posición "Conseguir posición del producto en el arrayList" |=| la cantidad que se pidió de ese producto
+                cantidadProductos[referenciaProductos.indexOf(getProductosPedido)] = getPedido.getCantidadProductos()[j];
+            }
+        }
+        //el arreglo debería estar listo
+        return cantidadProductos;
+    }
+    
+    /**
+     * Este método averigua la cantidad total de productos pedidos
+     * @return Un entero con la cantidad total de productos que se ordenaron
+     */
+    private int cantidadTotalProductosPedidos(){
+        return Pedido.cantidadTotal(this.conseguirCantidadesPedidos());
+    }
+    
+    /**
+     * Este método va revisando todos los pedidos buscando cuáles son express
+     * @return Un entero con la cantidad de pedidos que son express
+     */
+    private int cantidadTotalPedidosExpress(){
+        int cantidadExpress = 0;
+        for (int i = 0; i < this.administrador.getServidor().getPedidos().size(); i++) {
+            Pedido get = this.administrador.getServidor().getPedidos().get(i);
+            if(get.isExpress()){
+                cantidadExpress++;
+            }
+        }
+        return cantidadExpress;
+    }
+    
+    /**
+     * Este método va revisando todos los pedidos buscando cuáles no son express
+     * @return Un entero con la cantidad de pedidos que no son express
+     */
+    private int cantidadTotalPedidos(){
+        int cantidadPedidos = 0;
+        for (int i = 0; i < this.administrador.getServidor().getPedidos().size(); i++) {
+            Pedido get = this.administrador.getServidor().getPedidos().get(i);
+            if(!get.isExpress()){
+                cantidadPedidos++;
+            }
+        }
+        return cantidadPedidos;
+    }
+    
     /**
      * Este método esconde los labels y demás componentes típicos de cuando está con sesión iniciada que cuando
      * está con sesión no iniciada
