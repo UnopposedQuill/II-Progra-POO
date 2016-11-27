@@ -26,6 +26,8 @@ public class FrameAdministrador extends javax.swing.JFrame {
     public FrameAdministrador() {
         initComponents();
         //creo el nuevo administrador desde 0
+        this.administrador = null;
+        /*
         this.administrador = new Administrador(new Servidor());
         //ahora defino los hilos que actualizarán las tablas de la ventana del administrador
         //por ahora irán aquí, luego de que implemente el login, irán luego del mismo
@@ -35,20 +37,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
         this.hiloConexiones.start();
         this.hiloPedidos.start();
         this.administrador.arrancarServidor();
-        
+        */
         //Esto es para que cuando se arranque la ventana, aparezca una sólo el login
-        this.jScrollPane1.setVisible(false);
-        this.jScrollPane2.setVisible(false);
-        this.LabelPedidos.setVisible(false);
-        this.LabelConexiones.setVisible(false);
-        this.IP.setVisible(true);
-        this.Pedidos.setVisible(true);
-        this.observarMejoresProductos.setVisible(false);
-        this.observarPeoresProductos.setVisible(false);
-        this.observarRelacionPorcentual.setVisible(false);
-        this.agregarNuevoProducto.setVisible(false);
-        this.modificarProducto.setVisible(false);
-        this.observarTodosProductos.setVisible(false);
+        this.setVisibilidadSesion(false);
     }
 
     /**
@@ -78,6 +69,9 @@ public class FrameAdministrador extends javax.swing.JFrame {
         agregarNuevoProducto = new javax.swing.JButton();
         modificarProducto = new javax.swing.JButton();
         observarTodosProductos = new javax.swing.JButton();
+        PorcentajeExpress = new javax.swing.JTextField();
+        LabelEmpaque = new javax.swing.JLabel();
+        Error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -169,6 +163,18 @@ public class FrameAdministrador extends javax.swing.JFrame {
 
         observarTodosProductos.setText("Observar Todos Los Productos");
 
+        PorcentajeExpress.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PorcentajeExpress.setText("15");
+        PorcentajeExpress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PorcentajeExpressActionPerformed(evt);
+            }
+        });
+
+        LabelEmpaque.setText("Porcentaje Empaque:");
+
+        Error.setText("Error al Iniciar Sesión");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,47 +182,63 @@ public class FrameAdministrador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LabelConexiones)
-                            .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Administrador, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelConexiones)
+                                    .addComponent(LabelPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(LabelContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(LabelAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Administrador, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(IniciarSesión, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(IniciarSesión))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(observarMejoresProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(observarTodosProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(observarPeoresProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(agregarNuevoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(modificarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelEmpaque, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PorcentajeExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(observarMejoresProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(observarTodosProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(observarPeoresProductos, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(agregarNuevoProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(modificarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Administrador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelEmpaque, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PorcentajeExpress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LabelAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Administrador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,10 +254,10 @@ public class FrameAdministrador extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(observarMejoresProductos)
-                        .addComponent(observarPeoresProductos)))
+                        .addComponent(observarRelacionPorcentual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(observarPeoresProductos))
+                    .addComponent(observarMejoresProductos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(modificarProducto)
@@ -250,41 +272,35 @@ public class FrameAdministrador extends javax.swing.JFrame {
 
     private void IniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesiónActionPerformed
         // TODO add your handling code here:
-        if(this.LabelAdministrador.isVisible()){
-            this.Administrador.setVisible(false);
-            this.Contraseña.setVisible(false);
-            this.LabelAdministrador.setVisible(false);
-            this.LabelContraseña.setVisible(false);
-            this.LabelBienvenido.setText("Bienvenido, " + this.Administrador.getText());
-            this.LabelPedidos.setVisible(true);
-            this.LabelConexiones.setVisible(true);
-            this.IniciarSesión.setText("Cerrar Sesión");
-            this.jScrollPane1.setVisible(true);
-            this.jScrollPane2.setVisible(true);
-            this.observarMejoresProductos.setVisible(true);
-            this.observarPeoresProductos.setVisible(true);
-            this.observarRelacionPorcentual.setVisible(true);
-            this.agregarNuevoProducto.setVisible(true);
-            this.modificarProducto.setVisible(true);
-            this.observarTodosProductos.setVisible(true);
+        //¿El administrador es nulo?
+        if(this.administrador == null){
+            //Debo iniciar sesión
+            this.administrador = new Administrador(this.Administrador.getText(), String.valueOf(this.Contraseña.getPassword()));
+            if(this.administrador.getNombreUsuario() == null){
+                //el inicio de sesión no fue correcto
+                this.Error.setVisible(true);
+                this.administrador = null;
+            }
+            else{
+                //inicio de sesión correcto, Bienvenido Administrador.
+                //Preparo todos los hilos y sistemas correspondientes al administrador conectado
+                this.Error.setVisible(false);
+                //creo los hilos de actualizaciones
+                this.hiloConexiones = new HiloActualizador(this.administrador.getServidor().getConexiones(), this.IP);
+                this.hiloPedidos = new HiloActualizador(this.administrador.getServidor().getPedidos(), this.Pedidos);
+                //arranco los hilos que tiene la ventana: los pedidos y conexiones
+                this.hiloConexiones.start();
+                this.hiloPedidos.start();
+                //ahora los labels
+                this.setVisibilidadSesion(true);
+            }
         }
         else{
-            this.Administrador.setVisible(true);
-            this.Contraseña.setVisible(true);
-            this.LabelAdministrador.setVisible(true);
-            this.LabelContraseña.setVisible(true);
-            this.LabelBienvenido.setText("Bienvenido");
-            this.LabelPedidos.setVisible(false);
-            this.LabelConexiones.setVisible(false);
-            this.IniciarSesión.setText("Iniciar Sesión");
-            this.jScrollPane1.setVisible(false);
-            this.jScrollPane2.setVisible(false);
-            this.observarMejoresProductos.setVisible(false);
-            this.observarPeoresProductos.setVisible(false);
-            this.observarRelacionPorcentual.setVisible(false);
-            this.agregarNuevoProducto.setVisible(false);
-            this.modificarProducto.setVisible(false);
-            this.observarTodosProductos.setVisible(false);
+            //se desea desconectar
+            this.administrador.getServidor().pararServidor();
+            this.administrador.getServidor().asesinarServidor();
+            this.administrador = null;
+            this.setVisibilidadSesion(false);
         }
     }//GEN-LAST:event_IniciarSesiónActionPerformed
 
@@ -299,6 +315,10 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private void observarRelacionPorcentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_observarRelacionPorcentualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_observarRelacionPorcentualActionPerformed
+
+    private void PorcentajeExpressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PorcentajeExpressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PorcentajeExpressActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,18 +356,21 @@ public class FrameAdministrador extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Administrador;
     private javax.swing.JPasswordField Contraseña;
+    private javax.swing.JLabel Error;
     private javax.swing.JTable IP;
     private javax.swing.JButton IniciarSesión;
     private javax.swing.JLabel LabelAdministrador;
     private javax.swing.JLabel LabelBienvenido;
     private javax.swing.JLabel LabelConexiones;
     private javax.swing.JLabel LabelContraseña;
+    private javax.swing.JLabel LabelEmpaque;
     private javax.swing.JLabel LabelPedidos;
     private javax.swing.JTable Pedidos;
+    private javax.swing.JTextField PorcentajeExpress;
     private javax.swing.JButton agregarNuevoProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -358,4 +381,57 @@ public class FrameAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton observarTodosProductos;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Este método esconde los labels y demás componentes típicos de cuando está con sesión iniciada que cuando
+     * está con sesión no iniciada
+     * @param inicioODesconexion True si se desea que esté con la interfaz conectada, False para desconectada
+     */
+    private void setVisibilidadSesion(boolean inicioODesconexion){
+        if(inicioODesconexion){
+            this.Error.setVisible(false);
+            this.Administrador.setVisible(false);
+            this.Contraseña.setVisible(false);
+            this.LabelAdministrador.setVisible(false);
+            this.LabelContraseña.setVisible(false);
+            this.LabelBienvenido.setText("Bienvenido, " + this.administrador.getNombreUsuario());
+            this.LabelEmpaque.setVisible(true);
+            this.PorcentajeExpress.setVisible(true);
+            this.LabelPedidos.setVisible(true);
+            this.LabelConexiones.setVisible(true);
+            this.IniciarSesión.setText("Cerrar Sesión");
+            this.IP.setVisible(true);
+            this.Pedidos.setVisible(true);
+            this.jScrollPane1.setVisible(true);
+            this.jScrollPane2.setVisible(true);
+            this.observarMejoresProductos.setVisible(true);
+            this.observarPeoresProductos.setVisible(true);
+            this.observarRelacionPorcentual.setVisible(true);
+            this.agregarNuevoProducto.setVisible(true);
+            this.modificarProducto.setVisible(true);
+            this.observarTodosProductos.setVisible(true);
+        }
+        else{
+            this.Error.setVisible(false);
+            this.Administrador.setVisible(true);
+            this.Contraseña.setVisible(true);
+            this.LabelAdministrador.setVisible(true);
+            this.LabelContraseña.setVisible(true);
+            this.LabelBienvenido.setText("Bienvenido");
+            this.LabelEmpaque.setVisible(false);
+            this.PorcentajeExpress.setVisible(false);
+            this.LabelPedidos.setVisible(false);
+            this.LabelConexiones.setVisible(false);
+            this.IniciarSesión.setText("Iniciar Sesión");
+            this.IP.setVisible(false);
+            this.Pedidos.setVisible(false);
+            this.jScrollPane1.setVisible(false);
+            this.jScrollPane2.setVisible(false);
+            this.observarMejoresProductos.setVisible(false);
+            this.observarPeoresProductos.setVisible(false);
+            this.observarRelacionPorcentual.setVisible(false);
+            this.agregarNuevoProducto.setVisible(false);
+            this.modificarProducto.setVisible(false);
+            this.observarTodosProductos.setVisible(false);
+        }
+    }
 }

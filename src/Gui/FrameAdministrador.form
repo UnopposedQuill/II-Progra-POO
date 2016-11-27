@@ -27,43 +27,60 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="681" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelBienvenido" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="LabelConexiones" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelPedidos" min="-2" pref="97" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LabelAdministrador" min="-2" pref="94" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Administrador" min="-2" pref="335" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LabelConexiones" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LabelPedidos" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="LabelContraseña" min="-2" pref="94" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="Contraseña" min="-2" pref="335" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="LabelAdministrador" min="-2" pref="94" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="Administrador" min="-2" pref="335" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="Error" max="32767" attributes="0"/>
+                                          <Component id="IniciarSesión" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LabelContraseña" min="-2" pref="94" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Contraseña" min="-2" pref="335" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="IniciarSesión" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="observarMejoresProductos" max="32767" attributes="0"/>
-                                  <Component id="observarTodosProductos" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="observarPeoresProductos" max="32767" attributes="0"/>
-                                  <Component id="agregarNuevoProducto" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="observarRelacionPorcentual" max="32767" attributes="0"/>
-                                  <Component id="modificarProducto" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="LabelBienvenido" min="-2" pref="318" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="LabelEmpaque" min="-2" pref="191" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="PorcentajeExpress" min="-2" pref="94" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="observarMejoresProductos" max="32767" attributes="0"/>
+                          <Component id="observarTodosProductos" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="observarPeoresProductos" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="agregarNuevoProducto" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="observarRelacionPorcentual" max="32767" attributes="0"/>
+                          <Component id="modificarProducto" min="-2" pref="202" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -74,11 +91,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="LabelBienvenido" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LabelAdministrador" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="Administrador" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="LabelBienvenido" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="LabelEmpaque" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="PorcentajeExpress" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="Error" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="LabelAdministrador" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="Administrador" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -96,17 +120,17 @@
               <Component id="jScrollPane2" pref="122" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="observarRelacionPorcentual" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="observarMejoresProductos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="observarRelacionPorcentual" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="observarPeoresProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="observarMejoresProductos" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="modificarProducto" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="agregarNuevoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="agregarNuevoProducto" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="observarTodosProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -295,6 +319,25 @@
     <Component class="javax.swing.JButton" name="observarTodosProductos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Observar Todos Los Productos"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="PorcentajeExpress">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="15"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PorcentajeExpressActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LabelEmpaque">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Porcentaje Empaque:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Error">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Error al Iniciar Sesi&#xf3;n"/>
       </Properties>
     </Component>
   </SubComponents>

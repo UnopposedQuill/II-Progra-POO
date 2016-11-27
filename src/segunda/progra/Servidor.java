@@ -8,6 +8,8 @@ package segunda.progra;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 import org.jdom2.*;
@@ -15,13 +17,14 @@ import org.jdom2.input.*;
 import org.jdom2.output.*;
 
 /**
- *
+ * Esta es la clase del servidor.
  * @author Esteban
  */
 public class Servidor extends Thread{
     
     private boolean activo;
     private boolean pausado;
+    private int aumentoEmpaque;
     private ArrayList <Producto> productos;
     private ArrayList <Pedido> pedidos;
     private ArrayList <Conexion> conexiones;
@@ -43,6 +46,7 @@ public class Servidor extends Thread{
         this.productos = productos;
         this.pedidos = new ArrayList();
         this.conexiones = new ArrayList<>();
+        this.aumentoEmpaque = 15;
     }
     
     /**
@@ -66,15 +70,29 @@ public class Servidor extends Thread{
         this.productos = this.conseguirProductosXML("Productos.xml");
         this.pedidos = new ArrayList();
         this.conexiones = new ArrayList<>();
+        this.aumentoEmpaque = 15;
         System.out.println(this.toString());
     }
     
     /**
-     * Esto es para que el servidor se detenga, esté o no en ejecución
+     * Este método lo que hace es que deshace todas las conexiones y puertos que haya definido el servidor
+     */
+    public void asesinarServidor(){
+        try {
+            this.serverSocket.close();
+            System.out.println("Servidor eliminado con éxito");
+        } catch (IOException ex) {
+            System.out.println("Error al eliminar el servidor");
+        }
+    }
+    
+    /**
+     * Esto es para que el servidor se detenga completamente, esté o no en ejecución
      * @return El estado en el que quedó el servidor
      */
     public boolean pararServidor(){
         this.activo = false;
+        this.pausado = false;
         return this.activo;
     }
     
@@ -147,6 +165,24 @@ public class Servidor extends Thread{
 
     public ArrayList<Conexion> getConexiones() {
         return conexiones;
+    }
+
+    /**
+     * Este método busca el porcentaje extra de coste que tiene por empaque
+     * @return Un entero que representa el porcentaje extra que se aumenta al pedir express
+     */
+    public int getAumentoEmpaque() {
+        return aumentoEmpaque;
+    }
+
+    /**
+     * Este método modifica el porcentaje extra de coste a pagar por precio de empaque
+     * Nota: Sólo se modifica si el nuevo porcentaje es mayor o igual a 0
+     * @param aumentoEmpaque El nuevo porcentaje
+     */
+    public void setAumentoEmpaque(int aumentoEmpaque) {
+        if(0 <= aumentoEmpaque)
+            this.aumentoEmpaque = aumentoEmpaque;
     }
     
     /**
@@ -250,7 +286,7 @@ public class Servidor extends Thread{
                 }
             }
         }catch(IOException exception){
-            System.out.println("Hubo un problema al intentar conectar");
+            System.out.println("Hubo un problema al intentar conectar, o se eliminó el servidor");
         }
     }
     
