@@ -421,7 +421,7 @@ public class Servidor extends Thread{
             producto.addContent(descripcion);
             
             Element tamanhoPorcion = new Element("TamanhoPorcion");
-            tamanhoPorcion.addContent(get.getDescripcion());
+            tamanhoPorcion.addContent(String.valueOf(get.getTamanhoPorcion()));
             producto.addContent(tamanhoPorcion);
             
             Element piezaPorPorcion = new Element("PiezasPorPorcion");
