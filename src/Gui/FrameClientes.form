@@ -52,27 +52,32 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="hacerPedido" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="LabelCalorias" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Cleaner" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" pref="285" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="CambiarHuesped" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="LabelFiltro" min="-2" pref="85" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LabelCalorias" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LabelFiltro" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="ParametroFiltro" min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel5" min="-2" pref="106" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="SpinnerColumna" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Correcto" min="-2" pref="450" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ParametroFiltro" min="-2" pref="147" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel5" min="-2" pref="106" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="SpinnerColumna" min="-2" pref="131" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Correcto" min="-2" pref="450" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="Cleaner" max="32767" attributes="0"/>
+                          <Component id="RefrescarProductos" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -96,13 +101,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="Correcto" pref="33" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="SpinnerColumna" pref="33" max="32767" attributes="0"/>
-                      <Component id="LabelFiltro" max="32767" attributes="0"/>
-                      <Component id="ParametroFiltro" max="32767" attributes="0"/>
-                      <Component id="jLabel5" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Correcto" alignment="3" pref="33" max="32767" attributes="0"/>
+                      <Component id="RefrescarProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="SpinnerColumna" pref="33" max="32767" attributes="0"/>
+                  <Component id="LabelFiltro" max="32767" attributes="0"/>
+                  <Component id="ParametroFiltro" max="32767" attributes="0"/>
+                  <Component id="jLabel5" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -354,6 +360,14 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Pedido Realizado Correctamente"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="RefrescarProductos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Refrescar Productos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RefrescarProductosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
