@@ -558,6 +558,10 @@ public class FrameAdministrador extends javax.swing.JFrame {
         return cantidadPedidos;
     }
     
+    /**
+     * Este método retorna la cantidad total de pedidos 
+     * @return Un entero con la cantidad total de pedidos del servidor
+     */
     public int cantidadTotalPedidos(){
         return this.cantidadPedidosARecoger() + this.cantidadTotalPedidosEnSitio() + this.cantidadTotalPedidosExpress();
     }
