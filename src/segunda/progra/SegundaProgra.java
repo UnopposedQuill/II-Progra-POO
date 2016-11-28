@@ -5,6 +5,8 @@
  */
 package segunda.progra;
 
+import Gui.FrameAdministrador;
+
 /**
  *
  * @author Esteban
@@ -16,8 +18,7 @@ public class SegundaProgra {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Servidor servidorPrueba = new Servidor();
-        System.out.println(servidorPrueba.toString());
-        servidorPrueba.correrServidor();
+        System.out.println("Iniciando Programa");
+        FrameAdministrador ventanaAdministradora = new FrameAdministrador();
     }
 }
