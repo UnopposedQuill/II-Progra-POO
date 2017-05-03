@@ -153,6 +153,17 @@ public class Servidor extends Thread{
         return productos;
     }
 
+    public ArrayList<Producto> getProductosActivos(){
+        ArrayList<Producto> listaRetornar = new ArrayList<>();
+        for (int i = 0; i < listaRetornar.size(); i++) {
+            Producto get = listaRetornar.get(i);
+            if(get.isHabilitado()){
+                listaRetornar.add(get);
+            }
+        }
+        return listaRetornar;
+    }
+    
     /**
      * Para conseguir todos los pedidos que tiene el servidor en la base de datos actualmente
      * @return Todos los pedidos que ha recibido el servidor
@@ -316,7 +327,8 @@ public class Servidor extends Thread{
             case conseguirLista:{//se desea conseguir la lista completa de los productos
                 try{
                     System.out.println("Era una petición de la lista de productos");
-                    mensajeAAtender.setDatoDeRespuesta(this.productos);
+                    //mensajeAAtender.setDatoDeRespuesta(this.productos);
+                    mensajeAAtender.setDatoDeRespuesta(this.getProductosActivos());
                     this.flujoDeSalida.writeObject(mensajeAAtender);
                     System.out.println("Mensaje Retornado con Éxito");
                 }catch(IOException excep){

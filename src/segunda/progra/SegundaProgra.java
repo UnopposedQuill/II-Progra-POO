@@ -26,14 +26,14 @@ public class SegundaProgra {
         /*
         byte[] arreglo = {};
         try {
-            System.in.read();
-            System.in.read(arreglo);
+        System.in.read();
+        System.in.read(arreglo);
         } catch (IOException ex) {
-            Logger.getLogger(SegundaProgra.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(SegundaProgra.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (int i = 0; i < arreglo.length; i++) {
-            byte b = arreglo[i];
-            char cha = (char)b;
+        byte b = arreglo[i];
+        char cha = (char)b;
         }
         */
     }
